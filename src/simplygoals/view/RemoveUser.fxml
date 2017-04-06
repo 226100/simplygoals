@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="BorderPaneWindow" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.RemoveUserController">
+   <top>
+      <AnchorPane prefHeight="139.0" prefWidth="347.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="RemoveUserButton" layoutX="232.0" layoutY="27.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="75.0" text="Remove" />
+            <Label fx:id="MessageLabel" layoutX="23.0" layoutY="101.0" prefHeight="24.0" prefWidth="234.0" textFill="#f80202">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <ChoiceBox fx:id="UserChoiceBox" layoutX="23.0" layoutY="26.0" prefHeight="44.0" prefWidth="177.0" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>

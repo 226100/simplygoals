@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <TableView id="CenterPanelTable" fx:id="CenterPanelTableView" maxHeight="400.0" maxWidth="700.0" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn prefWidth="175.0" text="Name" />
+          <TableColumn prefWidth="116.0" text="Category" />
+            <TableColumn prefWidth="112.0" text="Type" />
+            <TableColumn prefWidth="108.0" text="Planned End" />
+            <TableColumn prefWidth="104.0" text="Actual End" />
+            <TableColumn prefWidth="84.0" text="Check End" />
+        </columns>
+      </TableView>
+   </center>
+</BorderPane>

@@ -1,0 +1,13 @@
+#mainPanel{
+	-fx-background-color: #9696b7;
+}
+#switchButton{
+	-fx-background-color: #9696b7;
+	-fx-background-image: url("icons/switch.png");
+	-fx-background-size: 60px 50px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
+    -fx-alignment:center;
+    -fx-padding: 0 0 0 0;
+    -fx-background-radius: 0;
+}

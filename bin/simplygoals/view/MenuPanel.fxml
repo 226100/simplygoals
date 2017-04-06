@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar maxHeight="30.0" maxWidth="900.0" minHeight="30.0" minWidth="900.0" prefHeight="30.0" prefWidth="900.0" style="-fx-background-color: F0EDE4;">
+        <menus>
+          <Menu fx:id="FileMenu" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+            </items>
+          </Menu>
+          <Menu fx:id="EditMenu" mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+            <Menu fx:id="PropertiesMenu" mnemonicParsing="false" text="Properties">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+              </items>
+            </Menu>
+          <Menu fx:id="HelpMenu" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+         <padding>
+            <Insets top="3.0" />
+         </padding>
+      </MenuBar>
+   </children>
+</AnchorPane>

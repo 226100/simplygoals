@@ -1,0 +1,75 @@
+.button {
+    -fx-background-color: #222223;
+    -fx-cursor: hand;
+    -fx-font-size: 13px;
+    -fx-font-family: "Bree Serif";
+    -fx-background-size: 75px 75px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center; 
+    -fx-alignment:center;
+    -fx-padding: 0 0 0 0;
+    -fx-background-radius: 0;
+}
+#TopPanelBox{
+	-fx-border-color:black;
+	-fx-border-style:solid;
+	-fx-border-width:4px 0px 0px 0px; 
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 15, 0.0 , 0 , 0 );
+	
+}
+@font-face
+{
+    src: url("fonts/bree.ttf");
+}
+#currentUserButton{
+	-fx-background-image: url("icons/currentUser.png");
+	-fx-background-size: 70px 70px;
+	-fx-alignment:bottom-center;
+	-fx-background-position: 50% 25%; 
+	-fx-text-fill:white;
+}
+#AddUserButton{
+	-fx-background-image: url("icons/addUser.png");
+}
+#RemoveUserButton{
+	-fx-background-image: url("icons/removeUser.png");
+}
+#AddGoalButton{
+	-fx-background-image: url("icons/addGoal.png");
+}
+#RemoveGoalButton{
+	-fx-background-image: url("icons/removeGoal.png");
+}
+#AddCategoryButton{
+	-fx-background-image: url("icons/addCategory.png");
+}
+#RemoveCategoryButton{
+	-fx-background-image: url("icons/removeCategory.png");
+}
+#StatisticsButton{
+	-fx-background-image: url("icons/statistics.png");
+}
+#currentUserButton:hover{
+	-fx-background-image: url("icons/currentUser_hover.png");
+}
+#AddUserButton:hover{
+	-fx-background-image: url("icons/addUser_hover.png");
+}
+#RemoveUserButton:hover{
+	-fx-background-image: url("icons/removeUser_hover.png");
+}
+#AddGoalButton:hover{
+	-fx-background-image: url("icons/addGoal_hover.png");
+}
+#RemoveGoalButton:hover{
+	-fx-background-image: url("icons/removeGoal_hover.png");
+}
+#AddCategoryButton:hover{
+	-fx-background-image: url("icons/addCategory_hover.png");
+}
+#RemoveCategoryButton:hover{
+	-fx-background-image: url("icons/removeCategory_hover.png");
+}
+#StatisticsButton:hover{
+	-fx-background-image: url("icons/statistics_hover.png");
+}

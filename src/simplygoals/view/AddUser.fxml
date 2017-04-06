@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane fx:id="AddUserAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="158.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.AddUserController">
+   <children>
+      <Label layoutX="22.0" layoutY="33.0" text="User name">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Label>
+      <TextField fx:id="UserNameTextField" layoutX="111.0" layoutY="21.0" prefHeight="44.0" prefWidth="184.0" />
+      <Button fx:id="UserNameOkButton" layoutX="306.0" layoutY="25.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="75.0" text="Ok">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label id="UserErrorLabel" fx:id="UserErrorLabel" layoutX="10.0" layoutY="85.0" prefHeight="61.0" prefWidth="375.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
