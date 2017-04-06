@@ -40,6 +40,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class MainPanelController extends MainController implements Initializable {
 	private ModelLogic modelLogic = new ModelLogic();
+
 	public ModelLogic getModelLogic() {
 		return modelLogic;}
     @FXML
@@ -48,15 +49,27 @@ public class MainPanelController extends MainController implements Initializable
 		return topPanelController;
 	}
 	
-    @FXML
+   
+	@FXML
     private MenuPanelController menuPanelController;
     
     @FXML
     private LeftPanelTimeModeController leftPanelTimeModeController;
-    
+    public LeftPanelTimeModeController getLeftPanelTimeModeController() {
+		return leftPanelTimeModeController;
+	}
+	public void setLeftPanelTimeModeController(LeftPanelTimeModeController leftPanelTimeModeController) {
+		this.leftPanelTimeModeController = leftPanelTimeModeController;
+	}
+	
     @FXML
     private CenterPanelTableController centerPanelTableController;
-
+	public CenterPanelTableController getCenterPanelTableController() {
+		return centerPanelTableController;
+	}
+	public void setCenterPanelTableController(CenterPanelTableController centerPanelTableController) {
+		this.centerPanelTableController = centerPanelTableController;
+	}
 
 
     @Override
@@ -72,8 +85,49 @@ public class MainPanelController extends MainController implements Initializable
     	showCurrentUserPanel();
     	showAddGoalPanel();
     	showRemoveGoalPanel();
-
+    	setPropertiesToTable();
+    	showDailyGoalList();
+    	showWeeklyGoalList();
+    	showMonthlyGoalList();
+    	showYearlyGoalList();
     	
+    }
+    public void setPropertiesToTable(){
+    	getCenterPanelTableController().getNameColumn().setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+		getCenterPanelTableController().getPlannedEndColumn().setCellValueFactory(cellData -> cellData.getValue().plannedDateOfEndProperty().asString());
+		getCenterPanelTableController().getRealEndColumn().setCellValueFactory(cellData -> cellData.getValue().realEndDateProperty().asString());
+		getCenterPanelTableController().getCategoryColumn().setCellValueFactory(cellData -> cellData.getValue().categoryProperty().asString());
+		getCenterPanelTableController().getTypeColumn().setCellValueFactory(cellData -> cellData.getValue().typeProperty().asString());
+		getCenterPanelTableController().getExecutedColumn().setCellValueFactory(cellData -> cellData.getValue().executedProperty().asString());
+		getCenterPanelTableController().getNotesColumn().setCellValueFactory(cellData -> cellData.getValue().notesProperty());
+    }
+    public void showDailyGoalList(){
+    	Button button = getLeftPanelTimeModeController().getDailyButton();
+    	button.setOnAction(event ->  {
+    		
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.DAILY_GOAL));
+		});
+    }
+    public void showWeeklyGoalList(){
+    	Button button = getLeftPanelTimeModeController().getWeeklyButton();
+    	button.setOnAction(event ->  {
+    		
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.WEEKLY_GOAL));
+		});
+    }
+    public void showMonthlyGoalList(){
+    	Button button = getLeftPanelTimeModeController().getMonthlyButton();
+    	button.setOnAction(event ->  {
+    		
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.MONTHLY_GOAL));
+		});
+    }
+    public void showYearlyGoalList(){
+    	Button button = getLeftPanelTimeModeController().getYearlyButton();
+    	button.setOnAction(event ->  {
+    		
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.YEARLY_GOAL));
+		});
     }
     public void showCurrentUser(){
     	Button button = getTopPanelController().getCurrentUserButton();

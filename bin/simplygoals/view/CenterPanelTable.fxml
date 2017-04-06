@@ -5,16 +5,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.CenterPanelTableController">
    <center>
       <TableView id="CenterPanelTable" fx:id="CenterPanelTableView" maxHeight="400.0" maxWidth="700.0" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="175.0" text="Name" />
-          <TableColumn prefWidth="116.0" text="Category" />
-            <TableColumn prefWidth="112.0" text="Type" />
-            <TableColumn prefWidth="108.0" text="Planned End" />
-            <TableColumn prefWidth="104.0" text="Actual End" />
-            <TableColumn prefWidth="84.0" text="Check End" />
+          <TableColumn fx:id="nameColumn" prefWidth="102.0" text="Name" />
+          <TableColumn fx:id="plannedEndColumn" prefWidth="78.0" text="Planned End" />
+            <TableColumn fx:id="realEndColumn" prefWidth="119.0" text="Real Date of End" />
+            <TableColumn fx:id="categoryColumn" prefWidth="112.0" text="Category" />
+            <TableColumn fx:id="executedColumn" prefWidth="64.0" text="Executed" />
+            <TableColumn fx:id="typeColumn" prefWidth="74.0" text="Type" />
+            <TableColumn fx:id="notesColumn" prefWidth="150.0" text="Notes" />
         </columns>
       </TableView>
    </center>

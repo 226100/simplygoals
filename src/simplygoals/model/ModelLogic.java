@@ -36,7 +36,7 @@ public class ModelLogic implements LogicHandling{
 	private AllUsers getAllUsers() {
 		return userList;
 	}
-	private MySQL getMySQL() {
+	public MySQL getMySQL() {
 		return mySQL;
 	}
 	public String getMsg() {

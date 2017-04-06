@@ -238,7 +238,47 @@ public class MySQL implements DatabaseServiceable {
 			   }
 		   }
 	   }
-	
+	   @Override
+	   public ObservableList<Goal> getRecordsByType(String tableName, GoalType goalType) {
+		   ObservableList<Goal> goalList = FXCollections.observableArrayList();
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT "+goal+", "+plannedDate+", "+endDate+", "+category+", "+type+", "+executed+", "+notes+" FROM "+tableName+" WHERE "+type+" = "+goalType.getId()+";";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   String nameT = rs.getString(goal);
+			   String plannedDateT = rs.getString(plannedDate);
+			   String endDateT = rs.getString(endDate);
+			   String categoryT=rs.getString(category);
+			   int typeT = rs.getInt(type);
+			   boolean executedT = rs.getBoolean(executed);
+			   String notesT=rs.getString(notes);
+			   goalList.add(new Goal.Builder(nameT, plannedDateT, GoalType.goalTypeFromId(typeT))
+					                .executed(executedT).notes(notesT).realEndDate(endDateT)
+					   				.category(new Category(categoryT)).build());
+		   }
+		   return goalList;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return goalList;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return goalList;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }
 	   @Override
 	   public ArrayList<String> getTableListfromDB(){
 		   ArrayList<String> tableList = new ArrayList<>();

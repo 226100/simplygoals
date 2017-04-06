@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import simplygoals.modelComponents.Goal;
+import simplygoals.modelComponents.GoalType;
 
 public interface DatabaseServiceable {
 	   
@@ -14,7 +15,8 @@ public interface DatabaseServiceable {
 	 public boolean removeRecord(String tableName, String goalName);
 	 public boolean updateRecord(String tableName, String goalName,  String realEndDate,boolean executed, String goalNotes);
 	 public boolean hasNameRecord(String tableName, String recordName);
-	 public ObservableList<Goal> getAllRecords(String tableName);
-	 public ArrayList<String> getTableListfromDB();
+	 ObservableList<Goal> getAllRecords(String tableName);
+	 ObservableList<Goal> getRecordsByType(String tableName, GoalType type);
+	 ArrayList<String> getTableListfromDB();
 }
 	

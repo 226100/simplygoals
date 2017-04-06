@@ -11,19 +11,19 @@ public class LeftPanelTimeModeController extends MainController implements Initi
 
 
 	    @FXML
-	    private Button DailyGoalsButton;
+	    private Button dailyButton;
 
 	    @FXML
-	    private Button MonthlyGoalsButton;
+	    private Button monthlyButton;
 
 	    @FXML
 	    private VBox LeftPanelTimeModeBox;
 
 	    @FXML
-	    private Button YearlyGoalsButton;
+	    private Button yearlyButton;
 
 	    @FXML
-	    private Button WeeklyGoalsButton;
+	    private Button weeklyButton;
 
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
@@ -31,6 +31,39 @@ public class LeftPanelTimeModeController extends MainController implements Initi
 			
 		}
 
+		public Button getDailyButton() {
+			return dailyButton;
+		}
+
+		public void setDailyButton(Button dailyButton) {
+			this.dailyButton = dailyButton;
+		}
+
+		public Button getMonthlyButton() {
+			return monthlyButton;
+		}
+
+		public void setMonthlyButton(Button monthlyButton) {
+			this.monthlyButton = monthlyButton;
+		}
+
+		public Button getYearlyButton() {
+			return yearlyButton;
+		}
+
+		public void setYearlyButton(Button yearlyButton) {
+			this.yearlyButton = yearlyButton;
+		}
+
+		public Button getWeeklyButton() {
+			return weeklyButton;
+		}
+
+		public void setWeeklyButton(Button weeklyButton) {
+			this.weeklyButton = weeklyButton;
+		}
+
+		
 	}
 
 
