@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<HBox id="TopPanelBox" fx:id="TopPanelBox" alignment="CENTER_LEFT" maxHeight="97.0" maxWidth="900.0" minHeight="97.0" minWidth="900.0" prefHeight="97.0" prefWidth="900.0" stylesheets="@TopPanelCSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.TopPanelController">
+   <children>
+      <Button id="currentUserButton" fx:id="currentUserButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button id="AddUserButton" fx:id="AddUserButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button id="RemoveUserButton" fx:id="RemoveUserButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button id="AddGoalButton" fx:id="AddGoalButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button id="RemoveGoalButton" fx:id="RemoveGoalButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button id="AddCategoryButton" fx:id="AddCategoryButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button id="RemoveCategoryButton" fx:id="RemoveCategoryButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button id="StatisticsButton" fx:id="StatisticsButton" mnemonicParsing="false" prefHeight="150.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+   </children>
+</HBox>

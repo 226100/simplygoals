@@ -1,5 +1,6 @@
 package simplygoals.modelComponents;
 import java.io.Serializable;
+
 import javafx.scene.paint.Color;
 
 public class Category implements Comparable<Category>, Serializable{
@@ -57,9 +58,5 @@ public class Category implements Comparable<Category>, Serializable{
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	
-
-	
+	}	
 }

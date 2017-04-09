@@ -1,10 +1,8 @@
 package simplygoals.model;
-import java.util.ArrayList;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
@@ -29,8 +27,6 @@ public interface LogicHandling {
 	void removeUserFromModel(User user);
 	
 	/* */
-	boolean isUserInLogic(User user);
-	/* */
 	void setCurrentUser(User user);
 	/* */
 	User getCurrentUser();
@@ -39,12 +35,8 @@ public interface LogicHandling {
 	/* */
 	void setUserList(ObservableList<User> userList);
 	/* */
-
-	
 	
 //***HANDLE GOALS***//
-	
-	
 	/* */
 	String addGoalToUser(Goal goal);
 	/* */
@@ -56,7 +48,7 @@ public interface LogicHandling {
 	/* */
 	void setGoalList(ObservableList<Goal> goalList);
 	/* */
-	void changeInGoal(Goal goal);
+	void updateGoal(Goal goal);
 	
 	
 //***HANDLE CATEGORIES***//

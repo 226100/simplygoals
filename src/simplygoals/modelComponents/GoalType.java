@@ -6,6 +6,7 @@ public enum GoalType {
 
     private int id;
     private String desc;
+    
     GoalType(int id, String desc) {
        this.id = id;
        this.desc=desc;

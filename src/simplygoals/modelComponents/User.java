@@ -1,13 +1,7 @@
 package simplygoals.modelComponents;
-import javafx.scene.paint.Color;
-import java.util.ArrayList;
-
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.Property;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import java.util.Optional;
+
+import javafx.collections.ObservableList;
 
 public class User implements Storable<Goal>, Comparable<User> {
 	
@@ -46,8 +40,7 @@ public class User implements Storable<Goal>, Comparable<User> {
 	
 	//*This method add goal to goalList in object User*//
 	@Override
-	public void addComponent(Goal component) {
-		
+	public void addComponent(Goal component) {	
 		Optional<Goal> goalOp = Optional.of(component);
 		goalOp.ifPresent(g->{
 			getGoalList().add(g);
@@ -57,7 +50,6 @@ public class User implements Storable<Goal>, Comparable<User> {
 	//*This method remove goal from goalList in object User*//
 	@Override
 	public void removeComponent(Goal component) {
-	
 		Optional<Goal> goalOp = Optional.of(component);
 		goalOp.ifPresent(g->{
 			if(isComponentInList(component)){
@@ -75,14 +67,12 @@ public class User implements Storable<Goal>, Comparable<User> {
 	//*This method check if object goal is in goalList*//
 	@Override
 	public boolean isComponentInList(Goal component) {
-		
 		return	getGoalList().stream().anyMatch(g->g.equals(component));
 	}
 	
 	//*This method return goal from goalList*//
 	@Override
 	public Goal getComponentFromList(String name) {
-		
 		Goal goal = getGoalList().stream().filter(g->g.getName().equals(name))
 							  .collect(singletonCollector());
 		return goal;
@@ -91,7 +81,6 @@ public class User implements Storable<Goal>, Comparable<User> {
 	//*This method return goal from goalList*//
 	@Override
 	public Goal getComponentFromList(Goal component) {
-		
 		Goal goal = getGoalList().stream().filter(g->g.equals(component))
 				  .collect(singletonCollector());
 		return goal;
@@ -143,10 +132,6 @@ public class User implements Storable<Goal>, Comparable<User> {
 
 	@Override
 	public void setComponentList(ObservableList<Goal> list) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
-	
+		this.goalList=list;
+	}	
 }

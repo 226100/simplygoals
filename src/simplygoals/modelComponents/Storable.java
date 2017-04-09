@@ -1,7 +1,7 @@
 package simplygoals.modelComponents;
-import java.util.ArrayList;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 import javafx.collections.ObservableList;
 
 public interface Storable<T> {

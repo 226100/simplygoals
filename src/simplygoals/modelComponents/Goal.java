@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.paint.Color;
 public class Goal implements Comparable<Goal>{
 	
 	//***NAME, PLANNED DATE OF END, FIELDCOLOR, REALENDDATE, CATEGORY, EXECUTED, NOTES***//
@@ -32,7 +31,6 @@ public class Goal implements Comparable<Goal>{
         return name;
     }
     
-    
 	public LocalDate getPlannedDateOfEnd() {
         return plannedDateOfEnd.get();
     }
@@ -44,9 +42,7 @@ public class Goal implements Comparable<Goal>{
     public ObjectProperty<LocalDate> plannedDateOfEndProperty() {
         return plannedDateOfEnd;
     }
-    
-    
-    
+      
 	public LocalDate getRealEndDate() {
         return realEndDate.get();
     }
@@ -72,8 +68,6 @@ public class Goal implements Comparable<Goal>{
         return category;
     }
     
-    
-    
 	public GoalType getType() {
         return type.get();
     }
@@ -85,8 +79,7 @@ public class Goal implements Comparable<Goal>{
     public ObjectProperty<GoalType> typeProperty() {
         return type;
     }
-    
-    
+     
     public boolean getExecuted() {
         return executed.get();
     }
@@ -240,5 +233,4 @@ public class Goal implements Comparable<Goal>{
 		name=name.substring(0, 1).toUpperCase() + name.substring(1);
 		return name;
 	}
-
 }

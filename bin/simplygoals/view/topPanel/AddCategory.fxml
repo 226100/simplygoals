@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.AddCategoryController">
+   <center>
+      <AnchorPane fx:id="anchorPane" prefHeight="438.0" prefWidth="482.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonAddCategory" layoutX="300.0" layoutY="63.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="107.0" text="Add" />
+            <TextField fx:id="textFieldAddCategory" layoutX="53.0" layoutY="63.0" prefHeight="56.0" prefWidth="211.0" />
+            <Label layoutX="53.0" layoutY="34.0" prefHeight="26.0" prefWidth="177.0" text="Add Category">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ListView fx:id="listViewAddCategory" layoutX="53.0" layoutY="145.0" prefHeight="258.0" prefWidth="211.0" />
+            <Label fx:id="messageAddCategory" layoutX="283.0" layoutY="145.0" prefHeight="57.0" prefWidth="167.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

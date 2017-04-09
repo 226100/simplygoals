@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<VBox id="LeftPanelTimeModeBox" fx:id="LeftPanelTimeModeBox" alignment="BOTTOM_LEFT" maxHeight="500.0" maxWidth="150.0" minHeight="500.0" minWidth="150.0" prefHeight="500.0" prefWidth="150.0" stylesheets="@LeftPanelTimeCSS.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.leftPanel.LeftPanelTimeModeController">
+   <children>
+      <Button id="dailyButton" fx:id="dailyButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="150.0" text="Daily Goals" />
+      <Button id="weeklyButton" fx:id="weeklyButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="150.0" text="Weekly Goals" />
+      <Button id="monthlyButton" fx:id="monthlyButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="150.0" text="Monthly Goals" />
+      <Button id="yearlyButton" fx:id="yearlyButton" mnemonicParsing="false" prefHeight="125.0" prefWidth="150.0" text="Yearly Goals" />
+   </children>
+</VBox>

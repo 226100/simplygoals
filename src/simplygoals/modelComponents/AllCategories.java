@@ -1,12 +1,10 @@
 package simplygoals.modelComponents;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
 import simplygoals.serialization.ClassSerializable;
 
 public class AllCategories implements Storable<Category>, Serializable, ClassSerializable<Category> {
@@ -43,7 +41,6 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 	//*This method add category to categoryList*//
 	@Override
 	public void addComponent(Category component) {
-		
 		Optional<Category> categoryOp = Optional.of(component);
 		categoryOp.ifPresent(c->{
 			getCategoryList().add(c);
@@ -55,7 +52,6 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 	//*This method remove category from categoryList*//
 	@Override
 	public void removeComponent(Category component) {
-		
 		Optional<Category> categoryOp = Optional.of(component);
 		categoryOp.ifPresent(c->{
 			if(isComponentInList(component)){
@@ -81,7 +77,6 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 	//*This method return category from categoryList*//
 	@Override
 	public Category getComponentFromList(String name) {
-		
 		Category category = getCategoryList().stream().filter(c->c.getName().equals(name))
 				  .collect(singletonCollector());
 		return category;
@@ -90,7 +85,6 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 	//*This method return category from categoryList*//
 	@Override
 	public Category getComponentFromList(Category component) {
-		
 		Category category = getCategoryList().stream().filter(c->c.equals(component))
 				  .collect(singletonCollector());
 		return category;
@@ -98,9 +92,6 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 
 	@Override
 	public void setComponentList(ObservableList<Category> list) {
-		
+		this.categoryList=list;
 	}
-	
-
-
 }

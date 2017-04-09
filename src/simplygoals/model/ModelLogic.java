@@ -1,46 +1,38 @@
 package simplygoals.model;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.paint.Color;
-
-import static java.util.stream.Collectors.*;
-
-import java.io.Serializable;
-import java.time.LocalDate;
-
 import simplygoals.database.MySQL;
-import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.AllCategories;
+import simplygoals.modelComponents.AllUsers;
+import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
-import simplygoals.modelComponents.AllUsers;
-import simplygoals.serialization.*;
 public class ModelLogic implements LogicHandling{
 	
 	//***USER LIST, MYSQL, CATEGORYLIST***//
 	public  AllUsers userList = new AllUsers();// object of class UserList which handle list of all users
 	private MySQL mySQL = new MySQL();//mySQL object to handle Database
 	private AllCategories categoryList = new AllCategories();// object of class CategoryList which handle list of all categories
-	private String msg;
+	private String msg;//message to controller
+	
 	//***CONSTRUCTOR**//
-	//public ModelLogic(){
-		//serializeFromFile(categoryList,"CategoryList.obj");
-	//}
+	public ModelLogic(){	
+	}
 	
 	//***GETTERS AND SETTERS***//
 	private AllUsers getAllUsers() {
 		return userList;
 	}
+	
 	public MySQL getMySQL() {
 		return mySQL;
 	}
+	
 	public String getMsg() {
 		return msg;
 	}
@@ -55,6 +47,7 @@ public class ModelLogic implements LogicHandling{
 	public void initDB(){
 		mySQL.createDatabase();
 	}
+	
 	@Override
 	public void initUserList() {
 		ObservableList<User> uList = FXCollections.observableArrayList();
@@ -65,15 +58,14 @@ public class ModelLogic implements LogicHandling{
 		}
 	}
 	
-	
 	//***HANDLE USERS***//
 	
 	//This method is default method to get userList and return to Controller class*//
 	@Override
 	public ObservableList<User> getUserList() {
-		
 		return userList.getComponentList();
 	}
+	
 	@Override
 	public void setUserList(ObservableList<User> userList) {
 		this.userList.setComponentList(userList);
@@ -130,27 +122,32 @@ public class ModelLogic implements LogicHandling{
 			}
 		});
 	}
+	
+	@Override
+	public void removeUserFromModel(User user) {	
+		Optional<User> userOp = Optional.of(user);
+		userOp.ifPresent(u->{
+			boolean isUserInModel = userList.isComponentInList(user);
+			if(isUserInModel){
+				userList.removeComponent(user);	
+			}
+		});
+	}
+	
 	@Override
 	public void setCurrentUser(User user){
 		userList.setCurrentUser(user);
 	}
+	
 	@Override
 	public User getCurrentUser(){	
 		return userList.getCurrentUser();
 	}
+	
 	public ObjectProperty<User> getCurrentUserProperty(){	
 		return userList.getCurrentUserProperty();
 	}
-	@Override
-	public void removeUserFromModel(User user) {
-		
-		
-	}
-	@Override
-	public boolean isUserInLogic(User user) {
-		
-		return false;
-	}
+
 
 	//***HANDLE GOALS***//
 	@Override
@@ -165,6 +162,7 @@ public class ModelLogic implements LogicHandling{
 		});
 		return msg;
 	}
+	
 	@Override
 	public String removeGoalFromUser(Goal goal) {
 		Optional.of(goal).ifPresent(g->{
@@ -192,6 +190,7 @@ public class ModelLogic implements LogicHandling{
 			return userList.getCurrentUser().getComponentList();
 		}else{return FXCollections.observableArrayList();}
 	}
+	
 	@Override
 	public ObservableList<Goal> getGoalListByType(GoalType type){
 	
@@ -206,10 +205,10 @@ public class ModelLogic implements LogicHandling{
 	}
 
 	@Override
-	public void changeInGoal(Goal goal) {
-		// TODO Auto-generated method stub
-		
+	public void updateGoal(Goal goal) {
+			
 	}
+	
 	//***HANDLE CATEGORIES***//
 	@Override
 	public String addCategoryToLogic(Category category) {
@@ -225,7 +224,6 @@ public class ModelLogic implements LogicHandling{
 			}
 		});
 		return msg;
-		
 	}
 
 	@Override
@@ -239,33 +237,22 @@ public class ModelLogic implements LogicHandling{
 				}
 		});
 		return msg;
-		
 	}
 
 	@Override
 	public ObservableList<Category> getCategoryList() {
-		
 		return categoryList.getComponentList();
 	}
 
 	@Override
-	public void setCategoryList(ObservableList<Category> categoryList) {
-		
+	public void setCategoryList(ObservableList<Category> categoryList) {	
+		this.categoryList.setCategoryList(categoryList);
 	}
 	
 	@Override
 	public boolean isCategoryInLogic(Category category) {
-		
 		Optional<Category> categoryOp = Optional.of(category);
 		if(categoryOp.isPresent()&&categoryList.isComponentInList(category)){return true;}
 		else {return false;}
 	}
-
-
-
-
-
 }
-
-
-

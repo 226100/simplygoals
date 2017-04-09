@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.AddGoalController">
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="850.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="320.0" layoutY="28.0" prefHeight="32.0" prefWidth="174.0" text="ADD GOAL">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="91.0" prefHeight="35.0" prefWidth="117.0" text="Goal Name">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="158.0" prefHeight="33.0" prefWidth="190.0" text="Planned Date of End">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="229.0" prefHeight="35.0" prefWidth="117.0" text="Type of goal">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="300.0" prefHeight="35.0" prefWidth="117.0" text="Category">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="377.0" prefHeight="35.0" prefWidth="117.0" text="Notes">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField id="goalName" fx:id="goalName" layoutX="185.0" layoutY="94.0" prefHeight="29.0" prefWidth="240.0" />
+            <DatePicker id="dateOfEnd" fx:id="dateOfEnd" layoutX="251.0" layoutY="162.0" />
+            <ComboBox id="typeOfGoal" fx:id="typeOfGoal" layoutX="251.0" layoutY="234.0" prefHeight="26.0" prefWidth="176.0" />
+            <ComboBox id="category" fx:id="category" layoutX="251.0" layoutY="303.0" prefHeight="27.0" prefWidth="179.0" />
+            <TextArea id="notes" fx:id="notes" layoutX="147.0" layoutY="386.0" prefHeight="200.0" prefWidth="283.0" />
+            <Button id="addGoalButton" fx:id="addGoalButton" layoutX="606.0" layoutY="516.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="191.0" text="Add Goal">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <ImageView id="goalAdded" fx:id="goalAdded" fitHeight="120.0" fitWidth="140.0" layoutX="632.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true" />
+            <Label id="msg" fx:id="msg" layoutX="510.0" layoutY="100.0" prefHeight="39.0" prefWidth="307.0" textFill="#f50202">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
