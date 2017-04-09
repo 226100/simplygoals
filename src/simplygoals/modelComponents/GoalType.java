@@ -2,15 +2,20 @@ package simplygoals.modelComponents;
 
 public enum GoalType {
 	
-	DAILY_GOAL(1),WEEKLY_GOAL(2),MONTHLY_GOAL(3),YEARLY_GOAL(4);
+	DAILY_GOAL(1, "Daily Goal"),WEEKLY_GOAL(2, "Weekly Goal"),MONTHLY_GOAL(3, "Monthly Goal"),YEARLY_GOAL(4, "Yearly Goal");
 
     private int id;
-    GoalType(int id) {
+    private String desc;
+    GoalType(int id, String desc) {
        this.id = id;
+       this.desc=desc;
     }
      
     public int getId() {
         return id;
+    }
+    public String getDesc(){
+    	return desc;
     }
    public static GoalType goalTypeFromId(int id) {
         for(GoalType g: GoalType.values()) {
@@ -19,4 +24,8 @@ public enum GoalType {
         }
         return GoalType.DAILY_GOAL;
     }
+   @Override
+   public String toString(){
+	   return desc;
+   }
 }

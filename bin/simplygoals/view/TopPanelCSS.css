@@ -26,7 +26,7 @@
 	-fx-background-size: 70px 70px;
 	-fx-alignment:bottom-center;
 	-fx-background-position: 50% 25%; 
-	-fx-text-fill:white;
+	
 }
 #AddUserButton{
 	-fx-background-image: url("icons/addUser.png");

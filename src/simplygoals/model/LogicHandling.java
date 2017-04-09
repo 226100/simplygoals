@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
+import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
 public interface LogicHandling {
 	
@@ -51,6 +52,7 @@ public interface LogicHandling {
 	/* */
 	ObservableList<Goal> getCurrentGoalList();
 	ObservableList<Goal> getAllGoalsList();
+	ObservableList<Goal> getGoalListByType(GoalType type);
 	/* */
 	void setGoalList(ObservableList<Goal> goalList);
 	/* */

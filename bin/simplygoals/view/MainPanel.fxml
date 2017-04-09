@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -20,15 +21,24 @@
                </center>
                <top>
                   <HBox prefHeight="70.0" prefWidth="750.0" BorderPane.alignment="TOP_CENTER">
-                     <children>
-                        <Button id="switchButton" fx:id="switchButton" mnemonicParsing="false" prefHeight="53.0" prefWidth="82.0" />
-                     </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <padding>
                         <Insets left="10.0" top="10.0" />
                      </padding>
+                     <children>
+                        <Label prefHeight="29.0" prefWidth="181.0" text="Current type of goals">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="typeOfGoal" prefHeight="31.0" prefWidth="181.0" textAlignment="CENTER" textFill="#f8f6f6">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
                   </HBox>
                </top>
             </BorderPane>

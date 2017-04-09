@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
@@ -17,6 +18,7 @@ import simplygoals.database.MySQL;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.AllCategories;
 import simplygoals.modelComponents.Goal;
+import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
 import simplygoals.modelComponents.AllUsers;
 import simplygoals.serialization.*;
@@ -136,6 +138,9 @@ public class ModelLogic implements LogicHandling{
 	public User getCurrentUser(){	
 		return userList.getCurrentUser();
 	}
+	public ObjectProperty<User> getCurrentUserProperty(){	
+		return userList.getCurrentUserProperty();
+	}
 	@Override
 	public void removeUserFromModel(User user) {
 		
@@ -154,7 +159,7 @@ public class ModelLogic implements LogicHandling{
 		
 		Optional.of(goal).ifPresent(u->{
 			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
-				mySQL.addRecord(getCurrentUser().getName(), goal.getName(), goal.getPlannedDateOfEnd().toString(),"2000-01-01",
+				mySQL.addRecord(getCurrentUser().getName(), goal.getName(), goal.getPlannedDateOfEnd().toString(),"0001-01-01",
 					            goal.getCategory().getName(),goal.getType().getId(),false, goal.getNotes());
 			}
 		});
@@ -182,9 +187,19 @@ public class ModelLogic implements LogicHandling{
 	}
 	@Override
 	public ObservableList<Goal> getAllGoalsList(){
-		userList.getCurrentUser().setGoalList(mySQL.getAllRecords(userList.getCurrentUser().getName()));
-		return userList.getCurrentUser().getComponentList();
+		if(Optional.ofNullable(userList.getCurrentUser()).isPresent()){
+			userList.getCurrentUser().setGoalList(mySQL.getAllRecords(userList.getCurrentUser().getName()));
+			return userList.getCurrentUser().getComponentList();
+		}else{return FXCollections.observableArrayList();}
 	}
+	@Override
+	public ObservableList<Goal> getGoalListByType(GoalType type){
+	
+		if(Optional.ofNullable(getCurrentUser()).isPresent()){
+			return mySQL.getRecordsByType(getCurrentUser().getName(), type);
+		}else{return FXCollections.observableArrayList();}
+	}
+	
 	@Override
 	public void setGoalList(ObservableList<Goal> goalList) {
 		getCurrentUser().setComponentList(goalList);

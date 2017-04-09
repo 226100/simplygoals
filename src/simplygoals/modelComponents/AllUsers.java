@@ -14,16 +14,19 @@ import javafx.collections.ObservableList;
 public class AllUsers implements Storable<User> {
 	
 	//***CURRENT USER, LIST OF ALL USERS
-	private User currentUser; // this user is set in program as a current user
+	private ObjectProperty<User> currentUser = new SimpleObjectProperty<>(); // this user is set in program as a current user
 	private ObservableList<User> userList;
 	
 	//GETTERS AND SETTERS
 	public User getCurrentUser() {
-		return currentUser;
+		return currentUser.get();
 	}
 	
 	public void setCurrentUser(User presentUser) {
-		this.currentUser = presentUser;
+		this.currentUser.set(presentUser);
+	}
+	public ObjectProperty<User> getCurrentUserProperty(){
+		return currentUser;
 	}
 	
 	//*This getter for userList is only for intern use in a UserList class*//

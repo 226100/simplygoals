@@ -3,6 +3,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.sun.javafx.css.converters.StringConverter;
+
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,7 +57,6 @@ public class AddGoalController implements Initializable {
 			typeOfGoal.setItems(FXCollections.observableArrayList(GoalType.DAILY_GOAL,GoalType.MONTHLY_GOAL,GoalType.WEEKLY_GOAL,GoalType.YEARLY_GOAL));
 			addGoal();
 		}
-		
 		public void addGoal(){
 			addGoalButton.setOnAction(x->{
 				if(goalName.getText().length()>0&&dateOfEnd.getValue()!=null&&typeOfGoal.getSelectionModel().isEmpty()==false&&category.getSelectionModel().isEmpty()==false){

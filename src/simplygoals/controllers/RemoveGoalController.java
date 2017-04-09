@@ -42,6 +42,7 @@ public class RemoveGoalController implements Initializable {
 					msg.setTextFill(Color.RED);
 					msg.setText(message);	
 					setGoalListView();
+					mainControl.refreshTableView();
 				});
 			});
 		}

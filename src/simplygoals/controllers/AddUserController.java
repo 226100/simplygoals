@@ -37,7 +37,9 @@ public class AddUserController implements Initializable {
 			String message=mainControl.getModelLogic().addUserToLogic(new User(UserNameTextField.getText()));
 			UserErrorLabel.setTextFill(Color.RED);
 			UserErrorLabel.setText(message);
-			
+			if(mainControl.getModelLogic().getUserList().size()==1){
+				mainControl.getModelLogic().setCurrentUser(mainControl.getModelLogic().getUserList().get(0));	
+			}
 		});
 	}
 	public void setMainControl(MainPanelController mainPanel){

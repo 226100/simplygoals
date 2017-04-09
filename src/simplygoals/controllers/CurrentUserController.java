@@ -3,6 +3,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -37,18 +39,27 @@ public class CurrentUserController implements Initializable{
 		}
 		public void setUser(){
 
-			currentUser.setText(mainControl.getModelLogic().getCurrentUser().toString());
-			
+			if(Optional.ofNullable(mainControl.getModelLogic().getCurrentUser()).isPresent()){
+				currentUser.setVisible(true);
+			}else{currentUser.setVisible(false);}
+			currentUser.textProperty().bind(mainControl.getModelLogic().getCurrentUserProperty().asString());
+			currentUser.textProperty().addListener(new ChangeListener<String>(){
+	            @Override 
+	            public void changed(ObservableValue<? extends String> o,String oldVal, 
+	                    String newVal){
+	                if (newVal=="null"){
+	                	currentUser.setVisible(false);
+	                }
+	                else{currentUser.setVisible(true);}
+	           }
+	         });
 			setCurrentUser.setOnAction(x->{
 				User user =userList.getSelectionModel().getSelectedItem();
 				Optional<User> opUser=Optional.of(user);
 				opUser.ifPresent(t->{
-					mainControl.getModelLogic().setCurrentUser(t);
-					
-					currentUser.setText(t.toString());	
-					Button button = mainControl.getTopPanelController().getCurrentUserButton();
-					button.setText(t.toString());
-					setUserList();
+					mainControl.getModelLogic().setCurrentUser(t);	
+					mainControl.refreshTableView();
+				
 					
 				});
 			});

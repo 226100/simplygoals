@@ -2,8 +2,11 @@ package simplygoals.controllers;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import simplygoals.modelComponents.Goal;
@@ -78,8 +81,29 @@ public class CenterPanelTableController implements Initializable {
 
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
-			
-			
+	    	getNameColumn().setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+			getPlannedEndColumn().setCellValueFactory(cellData -> cellData.getValue().plannedDateOfEndProperty().asString());
+			getRealEndColumn().setCellValueFactory(cellData -> cellData.getValue().realEndDateProperty().asString());
+			getCategoryColumn().setCellValueFactory(cellData -> cellData.getValue().categoryProperty().asString());
+			getTypeColumn().setCellValueFactory(cellData -> cellData.getValue().typeProperty().asString());
+			getExecutedColumn().setCellValueFactory(cellData -> cellData.getValue().executedProperty().asString());
+			getNotesColumn().setCellValueFactory(cellData -> cellData.getValue().notesProperty());
+			getNameColumn().setCellFactory(column -> {
+			    return new TableCell<Goal, String>() {
+			        @Override
+			        protected void updateItem(String item, boolean empty) {
+			            super.updateItem(item, empty);
+			            if (item == null || empty) {
+			                setText(null);
+			                setStyle("");
+			            } else {
+			            	String name =item;
+			            	name=name.substring(0, 1).toUpperCase() + name.substring(1);
+			                setText(name);
+			            }
+			        }
+			    };
+			});
 		}
 		public void setMainControl(MainPanelController mainPanel){
 

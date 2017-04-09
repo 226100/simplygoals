@@ -9,13 +9,13 @@
    <center>
       <TableView id="CenterPanelTable" fx:id="CenterPanelTableView" maxHeight="400.0" maxWidth="700.0" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="102.0" text="Name" />
-          <TableColumn fx:id="plannedEndColumn" prefWidth="78.0" text="Planned End" />
-            <TableColumn fx:id="realEndColumn" prefWidth="119.0" text="Real Date of End" />
-            <TableColumn fx:id="categoryColumn" prefWidth="112.0" text="Category" />
-            <TableColumn fx:id="executedColumn" prefWidth="64.0" text="Executed" />
-            <TableColumn fx:id="typeColumn" prefWidth="74.0" text="Type" />
-            <TableColumn fx:id="notesColumn" prefWidth="150.0" text="Notes" />
+          <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
+          <TableColumn fx:id="plannedEndColumn" text="Planned End" />
+            <TableColumn fx:id="realEndColumn" prefWidth="98.0" text="Real Date of End" />
+            <TableColumn fx:id="categoryColumn" prefWidth="95.0" text="Category" />
+            <TableColumn fx:id="executedColumn" prefWidth="65.0" text="Executed" />
+            <TableColumn fx:id="typeColumn" prefWidth="101.0" text="Type" />
+            <TableColumn fx:id="notesColumn" prefWidth="160.0" text="Notes" />
         </columns>
       </TableView>
    </center>

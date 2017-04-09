@@ -135,7 +135,7 @@ public class MySQL implements DatabaseServiceable {
 			      stmt = conn.createStatement();			   
 			      String sql = "INSERT INTO "+user+" ("+goal+", "+plannedDate+", "
 			                   +endDate+", "+category+", "+this.type+","+this.executed+", "+notes+")"+
-			    		        "VALUES ('"+goalName+"', '"+plannedDateOfEnd+"', "+"'2000-01-01'"+", '"+
+			    		        "VALUES ('"+goalName+"', '"+plannedDateOfEnd+"', '"+realEndDate+"', '"+
 			                   goalCategory+"', "+type+" ,0, '"+goalNotes+"');";
 			      stmt.executeUpdate(sql);
 			      return true;

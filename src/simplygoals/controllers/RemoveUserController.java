@@ -39,7 +39,6 @@ public class RemoveUserController extends MainController implements Initializabl
 		}
 		
 		public void choiceBoxInit(){
-			System.out.println(mainControl.getModelLogic());
 			UserChoiceBox.setItems(mainControl.getModelLogic().getUserList());
 		}
 		public void observeChoiceBox(){
@@ -60,12 +59,10 @@ public class RemoveUserController extends MainController implements Initializabl
 				UserChoiceBox.setItems(mainControl.getModelLogic().getUserList());	
 				if(mainControl.getModelLogic().getUserList().size()>0){
 					mainControl.getModelLogic().setCurrentUser(mainControl.getModelLogic().getUserList().get(0));	
+				}else{
+					mainControl.getModelLogic().setCurrentUser(null);
 				}
-				String cUser =mainControl.getModelLogic().getCurrentUser().getName();
-				cUser=cUser.substring(0, 1).toUpperCase() + cUser.substring(1);
-				Button button = mainControl.getTopPanelController().getCurrentUserButton();
-				button.setText(cUser);
-
+				mainControl.refreshTableView();
 			});
 		}
 			

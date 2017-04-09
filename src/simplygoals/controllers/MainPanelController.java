@@ -10,6 +10,8 @@ import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 import javafx.scene.control.MenuItem;
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,9 +23,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.beans.property.IntegerPropertyBase;
+import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -34,13 +40,25 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 public class MainPanelController extends MainController implements Initializable {
 	private ModelLogic modelLogic = new ModelLogic();
-
+	private ObjectProperty<GoalType> typeInTableView = new SimpleObjectProperty<>();
+	
+	
+	public GoalType getTypeInTableView() {
+		return typeInTableView.get();
+	}
+	public void setTypeInTableView(GoalType typeInTableView) {
+		this.typeInTableView.set(typeInTableView);
+	}
+	 public ObjectProperty<GoalType> getTypeInTableViewProperty() {
+	        return typeInTableView;
+	    }
 	public ModelLogic getModelLogic() {
 		return modelLogic;}
     @FXML
@@ -70,13 +88,48 @@ public class MainPanelController extends MainController implements Initializable
 	public void setCenterPanelTableController(CenterPanelTableController centerPanelTableController) {
 		this.centerPanelTableController = centerPanelTableController;
 	}
-
-
+	@FXML
+	private Label typeOfGoal;
+	public Label getTypeOfGoal() {
+		return typeOfGoal;
+	}
+	public void setTypeOfGoal(Label typeOfGoal) {
+		this.typeOfGoal = typeOfGoal;
+	}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     	
     	getModelLogic().initDB();//if there is no database create it, otherwise not
-    	getModelLogic().initUserList();
+    	getModelLogic().initUserList();//initialize user list in application(user list is take from database)
+    	//setPropertiesToTableView();//set properties to table view
+    	handleTopPanel();
+    	handleLeftPanel();
+    	handleTypeOfGoal();
+    	
+    }
+    public void handleTypeOfGoal(){
+    	typeOfGoal.setVisible(false);
+    	typeOfGoal.textProperty().bind(typeInTableView.asString());
+    	typeOfGoal.textProperty().addListener(new ChangeListener<String>(){
+            @Override 
+            public void changed(ObservableValue<? extends String> o,String oldVal, 
+                    String newVal){
+                if (newVal=="null"){
+                	typeOfGoal.setVisible(false);
+                }
+                else{typeOfGoal.setVisible(true);}
+           }
+         });
+    }
+    public void refreshTableView(){
+    		if(Optional.ofNullable(getTypeInTableView()).isPresent()&&Optional.ofNullable(modelLogic.getCurrentUser()).isPresent()){
+    			getCenterPanelTableController().getCenterPanelTableView().setItems(getModelLogic().getGoalListByType(getTypeInTableView()));		
+    		}	else{	getCenterPanelTableController().getCenterPanelTableView().setItems(FXCollections.observableArrayList());}
+    		
+       		
+
+    }
+    public void handleTopPanel(){
     	showCurrentUser();
     	showRemoveUserPanel();
     	showAddUserPanel();
@@ -85,14 +138,14 @@ public class MainPanelController extends MainController implements Initializable
     	showCurrentUserPanel();
     	showAddGoalPanel();
     	showRemoveGoalPanel();
-    	setPropertiesToTable();
+    }
+    public void handleLeftPanel(){
     	showDailyGoalList();
     	showWeeklyGoalList();
     	showMonthlyGoalList();
     	showYearlyGoalList();
-    	
     }
-    public void setPropertiesToTable(){
+    public void setPropertiesToTableView(){
     	getCenterPanelTableController().getNameColumn().setCellValueFactory(cellData -> cellData.getValue().nameProperty());
 		getCenterPanelTableController().getPlannedEndColumn().setCellValueFactory(cellData -> cellData.getValue().plannedDateOfEndProperty().asString());
 		getCenterPanelTableController().getRealEndColumn().setCellValueFactory(cellData -> cellData.getValue().realEndDateProperty().asString());
@@ -102,40 +155,53 @@ public class MainPanelController extends MainController implements Initializable
 		getCenterPanelTableController().getNotesColumn().setCellValueFactory(cellData -> cellData.getValue().notesProperty());
     }
     public void showDailyGoalList(){
+    	
     	Button button = getLeftPanelTimeModeController().getDailyButton();
     	button.setOnAction(event ->  {
-    		
-    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.DAILY_GOAL));
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getGoalListByType(GoalType.DAILY_GOAL));
+    		setTypeInTableView(GoalType.DAILY_GOAL);
 		});
     }
     public void showWeeklyGoalList(){
+    	
     	Button button = getLeftPanelTimeModeController().getWeeklyButton();
     	button.setOnAction(event ->  {
-    		
-    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.WEEKLY_GOAL));
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getGoalListByType(GoalType.WEEKLY_GOAL));
+    		setTypeInTableView(GoalType.WEEKLY_GOAL);
 		});
     }
     public void showMonthlyGoalList(){
+    	
     	Button button = getLeftPanelTimeModeController().getMonthlyButton();
     	button.setOnAction(event ->  {
-    		
-    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.MONTHLY_GOAL));
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getGoalListByType(GoalType.MONTHLY_GOAL));
+    		setTypeInTableView(GoalType.MONTHLY_GOAL);
 		});
     }
     public void showYearlyGoalList(){
+    	
     	Button button = getLeftPanelTimeModeController().getYearlyButton();
     	button.setOnAction(event ->  {
-    		
-    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getMySQL().getRecordsByType(modelLogic.getCurrentUser().getName(), GoalType.YEARLY_GOAL));
+    		getCenterPanelTableController().getCenterPanelTableView().setItems(modelLogic.getGoalListByType(GoalType.YEARLY_GOAL));
+    		setTypeInTableView(GoalType.YEARLY_GOAL);
 		});
     }
     public void showCurrentUser(){
     	Button button = getTopPanelController().getCurrentUserButton();
+    	button.textFillProperty().set(Color.valueOf("222223"));
+    	button.textProperty().bind(getModelLogic().getCurrentUserProperty().asString());
+    	button.textProperty().addListener(new ChangeListener<String>(){
+            @Override 
+            public void changed(ObservableValue<? extends String> o,String oldVal, 
+                    String newVal){
+                if (newVal=="null"){
+                	button.textFillProperty().setValue(Color.valueOf("222223"));
+                }
+                else{button.textFillProperty().setValue(Color.WHITE);}
+           }
+         });
     	if(getModelLogic().getUserList().size()>0){
-    		getModelLogic().setCurrentUser(getModelLogic().getUserList().get(0));	
-    		String userName = getModelLogic().getCurrentUser().getName();
-    		userName=userName.substring(0, 1).toUpperCase() + userName.substring(1);
-        	button.setText(userName);
+    		getModelLogic().setCurrentUser(getModelLogic().getUserList().get(0));	 		
     	}
     	
 
