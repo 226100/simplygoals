@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.CurrentUserController">
+<BorderPane id="view" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.CurrentUserController">
    <center>
-      <AnchorPane prefHeight="400.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="pane" prefHeight="400.0" prefWidth="500.0" stylesheets="@CurrentUserCSS.css" BorderPane.alignment="CENTER">
          <children>
             <ListView id="userList" fx:id="userList" layoutX="42.0" layoutY="63.0" prefHeight="259.0" prefWidth="214.0" />
-            <Label layoutX="42.0" layoutY="23.0" prefHeight="28.0" prefWidth="197.0" text="Set Current User">
+            <Label layoutX="82.0" layoutY="25.0" prefHeight="28.0" prefWidth="134.0" text="Set Current User">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Label>

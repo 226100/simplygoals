@@ -3,10 +3,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+import simplygoals.controllers.topPanel.RemoveGoalController;
 import simplygoals.modelComponents.Goal;
 
 public class CenterPanelTableController implements Initializable {
@@ -130,9 +137,39 @@ public class CenterPanelTableController implements Initializable {
 			        }
 			    };
 			});
+			centerPanelTableView.setRowFactory( tv -> {
+			    TableRow<Goal> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+			            Goal rowData = row.getItem();
+			            showGoalDetails(rowData);
+			        }
+			    });
+			    return row ;
+			});
 		}
 		
 		public void setMainControl(MainPanelController mainPanel){
 			mainControl=mainPanel;
+
 		}
+		public void showGoalDetails(Goal goal){
+
+					try {
+		        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/mainPanel/GoalDetails.fxml"));
+		        	Parent root = (Parent) fxmlLoader.load();
+		        	Stage stage = new Stage();
+		        	stage.setResizable(false);
+		        	stage.setTitle("Remove Goal");
+		        	stage.setScene(new Scene(root));  
+		        	GoalDetailsController goalDetailsController = fxmlLoader.getController();
+		        	goalDetailsController.setGoal(goal);
+		        	goalDetailsController.setMainControl(mainControl);
+		        	System.out.println(goal);
+		        	
+		        	stage.show();
+					} catch(Exception e) {
+						e.printStackTrace();
+					}
+	    }
 }

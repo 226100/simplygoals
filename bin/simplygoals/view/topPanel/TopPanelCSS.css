@@ -13,8 +13,8 @@
 #TopPanelBox{
 	-fx-border-color:black;
 	-fx-border-style:solid;
-	-fx-border-width:4px 0px 0px 0px; 
-	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 15, 0.0 , 0 , 0 );
+	-fx-border-width:2px 0px 0px 0px; 
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,1) , 10, 0.0 , 0 , 0 );
 	
 }
 @font-face

@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.mainPanel.CenterPanelTableController">
+<BorderPane id="tablePane" fx:id="tableViewPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.mainPanel.CenterPanelTableController">
    <center>
-      <TableView id="CenterPanelTable" fx:id="centerPanelTableView" maxHeight="400.0" maxWidth="700.0" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <TableView id="centerPanelTable" fx:id="centerPanelTableView" maxHeight="400.0" maxWidth="700.0" minHeight="400.0" minWidth="700.0" prefHeight="400.0" prefWidth="700.0" stylesheets="@CenterPanelTableCSS.css" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
           <TableColumn fx:id="plannedEndColumn" text="Planned End" />

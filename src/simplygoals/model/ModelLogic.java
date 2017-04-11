@@ -98,7 +98,7 @@ public class ModelLogic implements LogicHandling{
 		userOp.ifPresent(u->{
 			boolean isUserInList=userList.isComponentInList(user);
 			boolean	isUserInDb=mySQL.getTableListfromDB().stream()
-	                                .anyMatch(l->l.equals(user.getName()));
+	                                .anyMatch(l->l.equals(user.getName().toLowerCase()));
 			if(isUserInList&&isUserInDb){
 				userList.removeComponent(user);
 				if(!userList.isComponentInList(user)){

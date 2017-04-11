@@ -2,6 +2,7 @@ package simplygoals.controllers.topPanel;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.User;
 
@@ -65,7 +67,10 @@ public class RemoveUserController implements Initializable {
 		RemoveUserButton.setOnAction(x->{
 			String message = mainControl.getModelLogic().removeUserFromLogic(removedUser);
 			MessageLabel.setTextFill(Color.RED);
-			MessageLabel.setText(message);		
+			MessageLabel.setText(message);	
+			PauseTransition delay = new PauseTransition(Duration.seconds(1));
+			delay.setOnFinished( event -> MessageLabel.setText("") );
+			delay.play();
 			UserChoiceBox.setItems(mainControl.getModelLogic().getUserList());	
 			if(mainControl.getModelLogic().getUserList().size()>0){
 				mainControl.getModelLogic().setCurrentUser(mainControl.getModelLogic().getUserList().get(0));	
@@ -73,6 +78,7 @@ public class RemoveUserController implements Initializable {
 				mainControl.getModelLogic().setCurrentUser(null);
 			}
 			mainControl.refreshTableView();
+
 		});
 	}
 			
