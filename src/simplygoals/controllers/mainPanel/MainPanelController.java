@@ -226,6 +226,7 @@ public class MainPanelController implements Initializable {
     		    	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/AddUser.fxml"));
     		    	        	Parent root1 = (Parent) fxmlLoader.load();
     		    	        	Stage stage = new Stage();
+    		    	        	stage.initModality(Modality.APPLICATION_MODAL);
     		    	        	stage.setResizable(false);
     		    	        	stage.setTitle("Add User");
     		    	        	stage.setScene(new Scene(root1));  
@@ -246,9 +247,12 @@ public class MainPanelController implements Initializable {
     		    	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/RemoveUser.fxml"));	        	
     		    	        	Parent root2 = (Parent) fxmlLoader.load();
     		    	        	Stage stage = new Stage();
+    		    	        	stage.setAlwaysOnTop(true);
+    		    	        	stage.initModality(Modality.APPLICATION_MODAL);
     		    	        	stage.setResizable(false);
     		    	        	stage.setTitle("Remove User");
     		    	        	stage.setScene(new Scene(root2));
+    		    	        	
     		    	        	RemoveUserController removeUserController = fxmlLoader.getController();
         		 				removeUserController.setMainControl(MainPanelController.this);
     		    	        	
@@ -266,6 +270,8 @@ public class MainPanelController implements Initializable {
 		    	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/AddCategory.fxml"));
 		    	        	Parent root3 = (Parent) fxmlLoader.load();
 		    	        	Stage stage = new Stage();
+		    	        	stage.setAlwaysOnTop(true);
+		    	        	stage.initModality(Modality.APPLICATION_MODAL);
 		    	        	stage.setResizable(false);
 		    	        	stage.setTitle("Add Category");
 		    	        	stage.setScene(new Scene(root3));  
@@ -285,6 +291,8 @@ public class MainPanelController implements Initializable {
     		    	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/RemoveCategory.fxml"));
     		    	        	Parent root4 = (Parent) fxmlLoader.load();
     		    	        	Stage stage = new Stage();
+    		    	        	stage.setAlwaysOnTop(true);
+    		    	        	stage.initModality(Modality.APPLICATION_MODAL);
     		    	        	stage.setResizable(false);
     		    	        	stage.setTitle("Remove Category");
     		    	        	stage.setScene(new Scene(root4));  
@@ -304,6 +312,8 @@ public class MainPanelController implements Initializable {
     		    	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/CurrentUser.fxml"));
     		    	        	Parent root = (Parent) fxmlLoader.load();
     		    	        	Stage stage = new Stage();
+    		    	        	stage.setAlwaysOnTop(true);
+    		    	        	stage.initModality(Modality.APPLICATION_MODAL);
     		    	        	stage.setResizable(false);
     		    	        	stage.setTitle("Remove Category");
     		    	        	stage.setScene(new Scene(root));  
@@ -323,6 +333,8 @@ public class MainPanelController implements Initializable {
 	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/AddGoal.fxml"));
 	        	Parent root = (Parent) fxmlLoader.load();
 	        	Stage stage = new Stage();
+	        	stage.setAlwaysOnTop(true);
+	        	stage.initModality(Modality.APPLICATION_MODAL);
 	        	stage.setResizable(false);
 	        	stage.setTitle("Add Goal");
 	        	stage.setScene(new Scene(root));  
@@ -342,6 +354,8 @@ public class MainPanelController implements Initializable {
 	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/RemoveGoal.fxml"));
 	        	Parent root = (Parent) fxmlLoader.load();
 	        	Stage stage = new Stage();
+	        	stage.setAlwaysOnTop(true);
+	        	stage.initModality(Modality.APPLICATION_MODAL);
 	        	stage.setResizable(false);
 	        	stage.setTitle("Remove Goal");
 	        	stage.setScene(new Scene(root));  

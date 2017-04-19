@@ -10,7 +10,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.mainPanel.GoalDetailsController">
    <left>
-      <AnchorPane prefHeight="551.0" prefWidth="596.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="pane" prefHeight="551.0" prefWidth="596.0" stylesheets="@GoalDetailsCSS.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="11.0" layoutY="53.0" prefHeight="29.0" prefWidth="65.0" text="Name" />
             <Label layoutX="10.0" layoutY="105.0" prefHeight="26.0" prefWidth="111.0" text="Planned date of end" />
@@ -30,22 +30,22 @@
             <TextArea fx:id="notes" layoutX="75.0" layoutY="369.0" prefHeight="94.0" prefWidth="429.0" />
             <ChoiceBox fx:id="categoryList" layoutX="326.0" layoutY="222.0" prefHeight="24.0" prefWidth="174.0" />
             <ChoiceBox fx:id="typeList" layoutX="326.0" layoutY="316.0" prefHeight="17.0" prefWidth="175.0" />
-            <Label layoutX="237.0" layoutY="8.0" prefHeight="29.0" prefWidth="126.0" text="Goal Details">
+            <Label id="topic" layoutX="237.0" layoutY="8.0" prefHeight="29.0" prefWidth="126.0" text="Goal Details">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
             <Button fx:id="save" layoutX="419.0" layoutY="477.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="163.0" text="Save" />
-            <Line endX="120.0" layoutX="110.0" layoutY="50.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="93.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="145.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="205.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="260.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="310.0" startX="-100.0" />
-            <Line endX="120.0" layoutX="110.0" layoutY="350.0" startX="-100.0" />
-            <Line endY="300.0" layoutX="9.0" layoutY="50.0" />
-            <Line endY="300.0" layoutX="230.0" layoutY="50.0" />
-            <Line endY="300.0" layoutX="125.0" layoutY="50.0" />
+            <Line endX="120.0" layoutX="110.0" layoutY="50.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="93.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="145.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="205.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="260.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="310.0" startX="-100.0" stroke="#194e83" />
+            <Line endX="120.0" layoutX="110.0" layoutY="350.0" startX="-100.0" stroke="#194e83" />
+            <Line endY="300.0" layoutX="9.0" layoutY="50.0" stroke="#194e83" />
+            <Line endY="300.0" layoutX="230.0" layoutY="50.0" stroke="#194e83" />
+            <Line endY="300.0" layoutX="125.0" layoutY="50.0" stroke="#194e83" />
          </children>
       </AnchorPane>
    </left>

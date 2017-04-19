@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simplygoals.controllers.topPanel.RemoveGoalController">
    <right>
-      <AnchorPane prefHeight="550.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane id="pane" fx:id="pane" prefHeight="550.0" prefWidth="600.0" stylesheets="@RemoveGoalCSS.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="297.0" layoutY="23.0" prefHeight="42.0" prefWidth="194.0" text="Remove goal">
                <font>

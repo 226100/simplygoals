@@ -68,7 +68,7 @@ public class GoalDetailsController implements Initializable {
 		System.out.println(this.goal);
 		if (this.goal != null) {
 	        
-			name.setText(this.goal.getName());
+			name.setText(this.goal.toString());
 			pDateEnd.setText(this.goal.getPlannedDateOfEnd().toString());
 			rDateEnd.setText(this.goal.getRealEndDate().toString());
 			category.setText(this.goal.getCategory().toString());
