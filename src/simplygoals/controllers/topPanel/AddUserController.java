@@ -5,11 +5,14 @@ import java.util.ResourceBundle;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.User;
@@ -32,7 +35,8 @@ public class AddUserController implements Initializable {
     @FXML
     private TextField UserNameTextField;
     
-
+    private Stage stage;
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -42,7 +46,9 @@ public class AddUserController implements Initializable {
 		mainControl=mainPanel;
 		addUser();
 	}
-	
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
 	public void addUser(){
 		UserNameOkButton.setOnAction(x->{
 			if (!UserNameTextField.textProperty().getValue().isEmpty()){
@@ -56,14 +62,14 @@ public class AddUserController implements Initializable {
 				delay.setOnFinished( event -> UserErrorLabel.setText("") );
 				delay.play();
 			}else{
-				UserErrorLabel.setTextFill(Color.RED);
-				UserErrorLabel.setText("Please fill text field with your username");
-				PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
-				delay.setOnFinished( event -> UserErrorLabel.setText("") );
-				delay.play();
-				}
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(stage);
+				alert.setTitle("No Input");
+				alert.setHeaderText("Lack of username");
+				alert.setContentText("Please insert username to field");
+				alert.showAndWait();
 			//If there was no user and first User was added automatically set this user as current User
-
+			}
 		});
 	}
 }

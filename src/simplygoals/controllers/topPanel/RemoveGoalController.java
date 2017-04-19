@@ -5,10 +5,13 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.Goal;
 
@@ -24,7 +27,8 @@ public class RemoveGoalController implements Initializable {
 
 	@FXML
 	private Button remove;
-
+	
+	private Stage stage;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 			
@@ -35,6 +39,9 @@ public class RemoveGoalController implements Initializable {
 		setGoalListView();
 		removeGoal();
 	}
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
 	public void setGoalListView(){
 		goalList.setItems(mainControl.getModelLogic().getAllGoalsList());	
 	}
@@ -42,14 +49,21 @@ public class RemoveGoalController implements Initializable {
 	public void removeGoal(){
 		remove.setOnAction(x->{
 			Goal goal = goalList.getSelectionModel().getSelectedItem();
-			Optional<Goal> opGoal=Optional.of(goal);
-			opGoal.ifPresent(t->{
+			Optional<Goal> opGoal=Optional.ofNullable(goal);
+			if(opGoal.isPresent()){
 				String message=mainControl.getModelLogic().removeGoalFromUser(goal);
-				msg.setTextFill(Color.RED);
+				msg.setTextFill(Color.GREEN);
 				msg.setText(message);	
 				setGoalListView();
 				mainControl.refreshTableView();
-			});
+			}else{
+				Alert alert = new Alert(AlertType.WARNING);
+		        alert.initOwner(stage);
+		        alert.setTitle("No Selection");
+		        alert.setHeaderText("No Goal Selected");
+		        alert.setContentText("Please select a Goal in the list.");
+		        alert.showAndWait();
+			}
 		});
 	}	
 }

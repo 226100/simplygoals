@@ -21,6 +21,7 @@ public interface ClassSerializable<T> {
 				FileInputStream fis = new FileInputStream(fileName);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				) {
+				
 			    ArrayList<T> list = (ArrayList<T>) ois.readObject();
 		     	obList = FXCollections.observableArrayList(list);
 		} catch (FileNotFoundException e) {

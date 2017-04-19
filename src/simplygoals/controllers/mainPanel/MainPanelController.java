@@ -232,6 +232,7 @@ public class MainPanelController implements Initializable {
     		    	        	stage.setScene(new Scene(root1));  
     		    	        	AddUserController addUserController = fxmlLoader.getController();
     		    	        	addUserController.setMainControl(MainPanelController.this);
+    		    	        	addUserController.setStage(stage);
     		    	        	stage.show();
     		 				} catch(Exception e) {
     		 					e.printStackTrace();
@@ -255,7 +256,7 @@ public class MainPanelController implements Initializable {
     		    	        	
     		    	        	RemoveUserController removeUserController = fxmlLoader.getController();
         		 				removeUserController.setMainControl(MainPanelController.this);
-    		    	        	
+    		    	        	removeUserController.setStage(stage);
     		    	        	stage.show();
     		 				} catch(Exception e) {
     		 					e.printStackTrace();
@@ -277,6 +278,7 @@ public class MainPanelController implements Initializable {
 		    	        	stage.setScene(new Scene(root3));  
 		    	        	AddCategoryController addCategoryController = fxmlLoader.getController();
 		    	        	addCategoryController.setMainControl(MainPanelController.this);
+		    	        	addCategoryController.setStage(stage);
 		    	        	stage.show();
 		 				} catch(Exception e) {
 		 					e.printStackTrace();
@@ -298,7 +300,9 @@ public class MainPanelController implements Initializable {
     		    	        	stage.setScene(new Scene(root4));  
     		    	        	RemoveCategoryController removeCategoryController = fxmlLoader.getController();
     		    	        	removeCategoryController.setMainControl(MainPanelController.this);
+    		    	        	removeCategoryController.setStage(stage);
     		    	        	stage.show();
+    		    	        	
     		 				} catch(Exception e) {
     		 					e.printStackTrace();
     		 				}
@@ -319,6 +323,7 @@ public class MainPanelController implements Initializable {
     		    	        	stage.setScene(new Scene(root));  
     		    	        	CurrentUserController currentUserController = fxmlLoader.getController();
     		    	        	currentUserController.setMainControl(MainPanelController.this);
+    		    	        	currentUserController.setStage(stage);
     		    	        	stage.show();
     		 				} catch(Exception e) {
     		 					e.printStackTrace();
@@ -340,6 +345,7 @@ public class MainPanelController implements Initializable {
 	        	stage.setScene(new Scene(root));  
 	        	AddGoalController addGoalController = fxmlLoader.getController();
 	        	addGoalController.setMainControl(MainPanelController.this);
+	        	addGoalController.setStage(stage);
 	        	stage.show();
 				} catch(Exception e) {
 					e.printStackTrace();
@@ -361,6 +367,7 @@ public class MainPanelController implements Initializable {
 	        	stage.setScene(new Scene(root));  
 	        	RemoveGoalController removeGoalController = fxmlLoader.getController();
 	        	removeGoalController.setMainControl(MainPanelController.this);
+	        	removeGoalController.setStage(stage);
 	        	stage.show();
 				} catch(Exception e) {
 					e.printStackTrace();

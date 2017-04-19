@@ -5,13 +5,16 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.Category;
 
@@ -40,6 +43,7 @@ public class AddCategoryController implements Initializable {
 	@FXML
 	private TextField textFieldAddCategory;
 
+	private Stage stage;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -52,16 +56,27 @@ public class AddCategoryController implements Initializable {
 		setCategoryListView();
 	}
 	
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
 	public void addCategory(){
 		buttonAddCategory.setOnAction(x->{
 			String text = textFieldAddCategory.getText();
-			Optional<String> opText=Optional.of(text);
-			opText.ifPresent(t->{
+			
+			if(text.length()>0){
 				String message=mainControl.getModelLogic().addCategoryToLogic(new Category(text));
-				messageAddCategory.setTextFill(Color.RED);
+				messageAddCategory.setTextFill(Color.GREEN);
 				messageAddCategory.setText(message);	
 				setCategoryListView();
-			});
+			}else{
+				
+					Alert alert = new Alert(AlertType.WARNING);
+			        alert.initOwner(stage);
+			        alert.setTitle("No Input");
+			        alert.setHeaderText("No Category in Text Field");
+			        alert.setContentText("Please insert a name of category in the text field");
+			        alert.showAndWait();
+			}
 		});
 	}
 	

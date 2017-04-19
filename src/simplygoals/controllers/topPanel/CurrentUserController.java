@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.User;
 
@@ -27,6 +28,7 @@ public class CurrentUserController implements Initializable{
 	@FXML
 	private ListView<User> userList;
 	
+	private Stage stage;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -38,7 +40,9 @@ public class CurrentUserController implements Initializable{
 		setUserList();
 		setUser();
 	}
-	
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
 	//Handling of label which show current user and handling of button setCurrentUser
 	public void setUser(){
 		if(Optional.ofNullable(mainControl.getModelLogic().getCurrentUser()).isPresent()){
