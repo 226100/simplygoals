@@ -49,7 +49,7 @@ public class RemoveCategoryController implements Initializable{
 	}
 	public void setStage(Stage stage){
 		this.stage=stage;
-	}
+	} 
 	public void removeCategory(){
 		removeButton.setOnAction(x->{
 			Category cat = removeCategoryView.getSelectionModel().getSelectedItem();

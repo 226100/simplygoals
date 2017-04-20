@@ -13,7 +13,7 @@ public interface DatabaseServiceable {
 	 public boolean addRecord(String tableName, String goalName, String plannedDateOfEnd, String realEndDate,
                               String goalCategory,int type, boolean executed, String goalNotes);
 	 public boolean removeRecord(String tableName, String goalName);
-	 public boolean updateRecord(String tableName, String goalName,  String realEndDate,boolean executed, String goalNotes);
+	 public boolean updateRecord(String tableName, String goalName,  String realEndDate ,String category,int type, boolean executed, String goalNotes);
 	 public boolean hasNameRecord(String tableName, String recordName);
 	 ObservableList<Goal> getAllRecords(String tableName);
 	 ObservableList<Goal> getRecordsByType(String tableName, GoalType type);

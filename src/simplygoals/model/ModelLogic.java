@@ -206,7 +206,14 @@ public class ModelLogic implements LogicHandling{
 
 	@Override
 	public void updateGoal(Goal goal) {
-			
+		Optional.of(goal).ifPresent(u->{
+			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
+
+				mySQL.updateRecord(getCurrentUser().getName().toLowerCase(), goal.getName().toLowerCase(), goal.getRealEndDate().toString(),
+						goal.getCategory().getName(),goal.getType().getId(),goal.getExecuted(), goal.getNotes());
+			}
+		});
+
 	}
 	
 	//***HANDLE CATEGORIES***//

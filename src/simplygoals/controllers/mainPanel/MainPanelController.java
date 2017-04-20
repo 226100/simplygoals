@@ -122,6 +122,7 @@ public class MainPanelController implements Initializable {
     	handleTopPanel();
     	handleLeftPanel();
     	handleTypeOfGoal();
+    	centerPanelTableController.setMainControl(this);
     }
 
     public void handleTopPanel(){

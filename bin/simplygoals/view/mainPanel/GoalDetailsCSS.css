@@ -20,3 +20,16 @@
 #topic{
 	-fx-font-size: 23px;
 }
+
+#categoryList .context-menu{
+	-fx-text-fill:black;
+}
+#typeList .context-menu{
+	-fx-text-fill:black;
+}
+#categoryList .label{
+	-fx-text-fill:black;
+}
+#typeList .label{
+	-fx-text-fill:black;
+}

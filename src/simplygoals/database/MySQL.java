@@ -189,10 +189,41 @@ public class MySQL implements DatabaseServiceable {
 	   
 	   //*This method update data for one record in database, where one record is one goal*// 
 	   @Override
-	   public boolean updateRecord(String tableName, String goalName,String realEndDate,boolean finished, String goalNotes){
-		  return false;
+	   public boolean updateRecord(String tableName, String goalName,String realEndDate,String category,int type ,boolean finished, String goalNotes){
+		   try{	
+			   
+			    Class.forName("com.mysql.jdbc.Driver");
+			    conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			    stmt = conn.createStatement();			   
+			    String sql = "UPDATE "+tableName+" SET "+REAL_DATE_OF_END+"='"+realEndDate+"', "
+			    		+CATEGORY+"='"+category+"', "
+			    		+TYPE+"="+type+", "
+			    		+FINISHED+"="+finished+", "
+			    		+NOTES+"='"+goalNotes+"' "
+			    		+ "WHERE "+GOAL_NAME+"='"+goalName+"';";
+			    stmt.executeUpdate(sql);
+			    return true;
+		}catch(SQLException se){
+			    se.printStackTrace();
+			      return false;
+			   }catch(Exception e){
+			      e.printStackTrace();
+			      return false;
+			   }finally{
+				  
+			      try{
+			         if(stmt!=null)
+			            stmt.close();
+			      }catch(SQLException se2){}
+			      try{
+			         if(conn!=null)
+			            conn.close();
+			      }catch(SQLException se){
+			         se.printStackTrace();
+			      }
+			   }
 	   }
-	   //This method get all records from database for current User and return colletion of ready goals
+	   
 	   @Override
 	   public ObservableList<Goal> getAllRecords(String tableName) {
 		   ObservableList<Goal> goalList = FXCollections.observableArrayList();

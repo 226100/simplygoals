@@ -165,7 +165,7 @@ public class CenterPanelTableController implements Initializable {
 		        	GoalDetailsController goalDetailsController = fxmlLoader.getController();
 		        	goalDetailsController.setGoal(goal);
 		        	goalDetailsController.setMainControl(mainControl);
-		        	System.out.println(goal);
+		        	goalDetailsController.setStage(stage);
 		        	
 		        	stage.show();
 					} catch(Exception e) {
