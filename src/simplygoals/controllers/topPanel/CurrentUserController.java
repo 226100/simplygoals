@@ -7,9 +7,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
@@ -59,11 +61,18 @@ public class CurrentUserController implements Initializable{
 	    });
 		setCurrentUser.setOnAction(x->{
 			User user =userList.getSelectionModel().getSelectedItem();
-			Optional<User> opUser=Optional.of(user);
-			opUser.ifPresent(t->{
-				mainControl.getModelLogic().setCurrentUser(t);	
+			Optional<User> opUser=Optional.ofNullable(user);
+			if(opUser.isPresent()){
+				mainControl.getModelLogic().setCurrentUser(user);	
 				mainControl.refreshTableView();	
-			});
+			}else{
+				Alert alert = new Alert(AlertType.WARNING);
+		        alert.initOwner(stage);
+		        alert.setTitle("No Selection");
+		        alert.setHeaderText("No User Selected");
+		        alert.setContentText("Please select a User in the list.");
+		        alert.showAndWait();
+			}
 		});
 	}
 	

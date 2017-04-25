@@ -1,5 +1,6 @@
 package simplygoals.controllers.topPanel;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
+import simplygoals.util.DateUtil;
 
 public class AddGoalController implements Initializable {
 
@@ -66,17 +68,33 @@ public class AddGoalController implements Initializable {
 	}
 	public void addGoal(){
 		addGoalButton.setOnAction(x->{
-			if(goalName.getText().length()>0&&dateOfEnd.getValue()!=null&&typeOfGoal.getSelectionModel().isEmpty()==false&&category.getSelectionModel().isEmpty()==false){
+			boolean isDateValid=false;
+			if(dateOfEnd.getValue()!=null){
+				if(DateUtil.validDate(dateOfEnd.getValue().format(DateUtil.DATE_FORMATTER))){
+					isDateValid=true;
+				}else{
+				isDateValid=false;
+				Alert alert = new Alert(AlertType.WARNING);
+		        alert.initOwner(stage);
+		        alert.setTitle("Error in Data");
+		        alert.setHeaderText("Data is invalid");
+		        alert.setContentText("Please insert valid data in format dd-mm-yyyy or get data from DataPicker");
+		        alert.showAndWait();
+		
+				}
+			}
+			if(goalName.getText().length()>0&&isDateValid&&typeOfGoal.getSelectionModel().isEmpty()==false&&category.getSelectionModel().isEmpty()==false){
 				mainControl.getModelLogic().addGoalToUser(
-					new Goal.Builder(goalName.getText(),dateOfEnd.getValue().toString(),typeOfGoal.getSelectionModel().getSelectedItem() ).category(category.getSelectionModel().getSelectedItem()).notes(notes.getText()).build());
+					new Goal.Builder(goalName.getText(),dateOfEnd.getValue().format(DateUtil.DATE_FORMATTER).toString(),typeOfGoal.getSelectionModel().getSelectedItem() ).category(category.getSelectionModel().getSelectedItem()).notes(notes.getText()).realEndDate("01-01-0001").build());
 					msg.setText("Goal added Successfully");
+					dateOfEnd.getValue().format(DateUtil.DATE_FORMATTER).toString();
 			}else{
 				
 				Alert alert = new Alert(AlertType.WARNING);
 		        alert.initOwner(stage);
 		        alert.setTitle("No Input");
 		        alert.setHeaderText("All fields are not filled");
-		        alert.setContentText("Please insert data to all of fields");
+		        alert.setContentText("Please insert data to all of fields in proper format");
 		        alert.showAndWait();
 		}
 		});

@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import simplygoals.controllers.topPanel.RemoveGoalController;
 import simplygoals.modelComponents.Goal;
 
@@ -119,7 +120,7 @@ public class CenterPanelTableController implements Initializable {
 			getTypeColumn().setCellValueFactory(cellData -> cellData.getValue().typeProperty().asString());
 			getExecutedColumn().setCellValueFactory(cellData -> cellData.getValue().executedProperty().asString());
 			getNotesColumn().setCellValueFactory(cellData -> cellData.getValue().notesProperty());
-			
+
 			//First letter uppercase
 			getNameColumn().setCellFactory(column -> {
 			    return new TableCell<Goal, String>() {

@@ -12,6 +12,7 @@ import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
+import simplygoals.util.DateUtil;
 public class ModelLogic implements LogicHandling{
 	
 	//***USER LIST, MYSQL, CATEGORYLIST***//
@@ -156,8 +157,9 @@ public class ModelLogic implements LogicHandling{
 		
 		Optional.of(goal).ifPresent(u->{
 			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
-				mySQL.addRecord(getCurrentUser().getName(), goal.getName(), goal.getPlannedDateOfEnd().toString(),"0001-01-01",
+				mySQL.addRecord(getCurrentUser().getName(), goal.getName(), DateUtil.format(goal.getPlannedDateOfEnd()),DateUtil.format(goal.getRealEndDate()),
 					            goal.getCategory().getName(),goal.getType().getId(),false, goal.getNotes());
+			
 			}
 		});
 		return msg;
@@ -207,9 +209,9 @@ public class ModelLogic implements LogicHandling{
 	@Override
 	public void updateGoal(Goal goal) {
 		Optional.of(goal).ifPresent(u->{
-			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
+			if(goal.getCategory()!=null&&goal.getRealEndDate()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
 
-				mySQL.updateRecord(getCurrentUser().getName().toLowerCase(), goal.getName().toLowerCase(), goal.getRealEndDate().toString(),
+				mySQL.updateRecord(getCurrentUser().getName().toLowerCase(), goal.getName().toLowerCase(), goal.getRealEndDate().format(DateUtil.DATE_FORMATTER).toString(),
 						goal.getCategory().getName(),goal.getType().getId(),goal.getExecuted(), goal.getNotes());
 			}
 		});

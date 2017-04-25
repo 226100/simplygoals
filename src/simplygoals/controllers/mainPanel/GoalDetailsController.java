@@ -1,6 +1,7 @@
 package simplygoals.controllers.mainPanel;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
+import simplygoals.util.DateUtil;
 public class GoalDetailsController implements Initializable {
 	private MainPanelController mainControl = new MainPanelController();
 	private Goal goal=null;
@@ -35,13 +37,15 @@ public class GoalDetailsController implements Initializable {
 
 	@FXML
 	private DatePicker realDateOfEnd;
-	
     @FXML
     private TextArea notes;
     
     @FXML
     private Button save;
 
+    @FXML
+    private Button today;
+    
     @FXML
     private TextField name;
 
@@ -59,6 +63,7 @@ public class GoalDetailsController implements Initializable {
 		mainControl=mainPanel;
 		showGoalDetails();
 		saveGoal();
+		setToday();
 	}
 	public void setStage(Stage stage){
 		this.stage=stage;
@@ -87,15 +92,38 @@ public class GoalDetailsController implements Initializable {
 			notes.setText("");
 	    }
 	}
+	public void setToday(){
+		today.setOnAction(x->{
+			realDateOfEnd.setValue(LocalDate.now());
+		});
+	}
 	public void saveGoal(){
 		save.setOnAction(x->{
 
-			if(name.getText().length()>0&plannedDateOfEnd.getText().length()>0&&realDateOfEnd.getValue()!=null&&categoryList.getSelectionModel().isEmpty()==false&&typeList.getSelectionModel().isEmpty()==false){
-						this.goal.setRealEndDate(realDateOfEnd.getValue());
+			boolean isDateValid=false;
+			if(realDateOfEnd.getValue()!=null){
+				if(DateUtil.validDate(realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER))){
+					isDateValid=true;
+				}else{
+				isDateValid=false;
+				Alert alert = new Alert(AlertType.WARNING);
+		        alert.initOwner(stage);
+		        alert.setTitle("Error in Data");
+		        alert.setHeaderText("Data is invalid");
+		        alert.setContentText("Please insert valid data in format dd-mm-yyyy or get data from DataPicker");
+		        alert.showAndWait();
+		
+				}
+			}
+			
+			if(name.getText().length()>0&plannedDateOfEnd.getText().length()>0&&isDateValid&&categoryList.getSelectionModel().isEmpty()==false&&typeList.getSelectionModel().isEmpty()==false){
+						String date=realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER);
+						this.goal.setRealEndDate(DateUtil.parse(date));
 						this.goal.setCategory(categoryList.getValue());
 						this.goal.setExecuted(isFinished.isSelected());
 						this.goal.setType(typeList.getValue());
 						this.goal.setNotes(notes.getText());				
+						
 						mainControl.getModelLogic().updateGoal(this.goal);
 						Alert alert = new Alert(AlertType.WARNING);
 				        alert.initOwner(stage);

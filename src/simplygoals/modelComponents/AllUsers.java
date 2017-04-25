@@ -94,5 +94,5 @@ public class AllUsers implements Storable<User> {
 		User user = getUserList().stream().filter(u->u.equals(component))
 				  .collect(singletonCollector());
 		return user;
-	}	
+	}
 }

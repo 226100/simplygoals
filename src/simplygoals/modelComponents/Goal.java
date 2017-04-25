@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import simplygoals.util.DateUtil;
 public class Goal implements Comparable<Goal>{
 	
 	//***NAME, PLANNED DATE OF END, FIELDCOLOR, REALENDDATE, CATEGORY, EXECUTED, NOTES***//
@@ -193,7 +194,11 @@ public class Goal implements Comparable<Goal>{
         public Builder(final String name, final String date, final GoalType type)
         {
             this.name = name;
-            this.plannedDateOfEnd=LocalDate.parse(date);
+            if(DateUtil.validDate(date)==false){
+            	this.plannedDateOfEnd=null;
+            }else{
+            	this.plannedDateOfEnd=DateUtil.parse(date);
+            }
             this.type = type;
         }
         public Builder category(final Category category)
@@ -206,7 +211,11 @@ public class Goal implements Comparable<Goal>{
         	return this;
         }
         public Builder realEndDate(final String date){
-        	this.realEndDate = LocalDate.parse(date);
+        	if(DateUtil.validDate(date)==false){
+        		this.realEndDate=null;
+        	}else{
+        		this.realEndDate = DateUtil.parse(date);
+        	}
         	return this;
         }
         public Builder notes(final String notes)
