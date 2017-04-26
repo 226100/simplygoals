@@ -373,5 +373,70 @@ public class MySQL implements DatabaseServiceable {
 				   se.printStackTrace();
 			   }
 		   }
+	   }
+	   public int amountOfGoals(String tableName){
+		   int count = 0;
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(NAME) FROM "+tableName+";";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
 	   }   
+	   public int amountOfGoalsByType(String tableName, GoalType goalType){
+		   int count = 0;
+		   System.out.println(goalType.getId());
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(Name) FROM "+tableName.toLowerCase()+" WHERE Type= "+goalType.getId()+";";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }   
+	   
+	   
 }

@@ -8,6 +8,7 @@ import simplygoals.controllers.topPanel.CurrentUserController;
 import simplygoals.controllers.topPanel.RemoveCategoryController;
 import simplygoals.controllers.topPanel.RemoveGoalController;
 import simplygoals.controllers.topPanel.RemoveUserController;
+import simplygoals.controllers.topPanel.StatisticsController;
 import simplygoals.controllers.topPanel.TopPanelController;
 import simplygoals.database.MySQL;
 import simplygoals.model.*;
@@ -17,6 +18,7 @@ import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 import javafx.scene.control.MenuItem;
@@ -134,6 +136,7 @@ public class MainPanelController implements Initializable {
     	showCurrentUserPanel();
     	showAddGoalPanel();
     	showRemoveGoalPanel();
+    	showStatistics();
     }
     
     public void handleLeftPanel(){
@@ -375,4 +378,29 @@ public class MainPanelController implements Initializable {
 				}
 					});
     }
+    
+    public void showStatistics(){
+    	Button button = getTopPanelController().getStatisticsButton();
+    	button.setOnAction(event ->  {
+				try {
+	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/topPanel/Statistics.fxml"));
+	        	Parent root = (Parent) fxmlLoader.load();
+	        	Stage stage = new Stage();
+	        	stage.setAlwaysOnTop(true);
+	        	stage.initModality(Modality.APPLICATION_MODAL);
+	        	stage.setResizable(false);
+	        	stage.setTitle("Statistics");
+	        	stage.setScene(new Scene(root));  
+	        	StatisticsController statisticsController = fxmlLoader.getController();
+	        	statisticsController.setMainControl(MainPanelController.this);
+	        	statisticsController.setStage(stage);
+	        	//Arrays.asList(3,2,5,12,33,1,45,13,4,10,11,12)
+	        	statisticsController.setGoalsData(modelLogic.getReachedGoalsInTime());
+	        	stage.show();
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+					});
+    }
+
 }

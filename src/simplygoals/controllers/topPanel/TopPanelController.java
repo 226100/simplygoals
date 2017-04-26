@@ -68,6 +68,7 @@ public class TopPanelController implements Initializable {
     public Button getRemoveGoalButton() {
 		return RemoveGoalButton;
 	}
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

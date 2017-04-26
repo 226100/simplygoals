@@ -1,6 +1,9 @@
 package simplygoals.model;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
@@ -218,6 +221,22 @@ public class ModelLogic implements LogicHandling{
 
 	}
 	
+	public List<Integer> getReachedGoalsInTime(){
+		
+		Integer [] tab = {0,0,0,0,0,0,0,0,0,0,0,0};
+		List<Integer> reachedGoals=Arrays.asList(tab);
+		ObservableList<Goal> list = FXCollections.observableArrayList();
+		list=mySQL.getAllRecords(userList.getCurrentUser().getName());
+		if(Optional.ofNullable(list).isPresent()){
+			list=list.stream().filter(i->(i.getPlannedDateOfEnd().isBefore(i.getRealEndDate()))&&(i.getExecuted()==true)).collect(Collectors.toCollection(FXCollections::observableArrayList));
+			for(Goal goal:list){
+				int index=goal.getRealEndDate().getMonthValue()-1;
+				Integer count=reachedGoals.get(index);
+				reachedGoals.set(index, count+1);
+			}
+		}
+		return reachedGoals;
+	}
 	//***HANDLE CATEGORIES***//
 	@Override
 	public String addCategoryToLogic(Category category) {
