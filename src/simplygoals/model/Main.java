@@ -4,18 +4,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import simplygoals.controllers.mainPanel.MainPanelController;
 	 
 public class Main extends Application {
 	private Stage primaryStage;
 	@Override
 	public void start(Stage stage) throws Exception {
 		this.primaryStage = stage;
-		Parent parent = (Parent)FXMLLoader.load(getClass().getResource("/simplygoals/view/mainPanel/MainPanel.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/simplygoals/view/mainPanel/MainPanel.fxml"));
+    	Parent parent = (Parent) fxmlLoader.load();
 	    Scene scene = new Scene(parent);
 	    stage.setResizable(false);
 	    stage.setScene(scene);
 	    stage.setTitle("SimplyGoals");
 	    stage.show();
+	    MainPanelController mainPanelController = new MainPanelController();
+	    mainPanelController=fxmlLoader.getController();
+	    mainPanelController.setStage(stage);
 	}
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -24,4 +29,3 @@ public class Main extends Application {
 	    launch(args);    
 	}
 }
-

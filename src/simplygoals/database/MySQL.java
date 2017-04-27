@@ -31,7 +31,13 @@ public class MySQL implements DatabaseServiceable {
 	
 	Connection conn = null;
 	Statement stmt = null;
-	
+	private boolean connEstablished=false;
+	public boolean isConnEstablished() {
+		return connEstablished;
+	}
+	public void setConnEstablished(boolean connEstablished) {
+		this.connEstablished = connEstablished;
+	}
 	//*This method create database if doesn't exist*//
 	@Override
 	public void createDatabase(){
@@ -39,12 +45,16 @@ public class MySQL implements DatabaseServiceable {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			stmt = conn.createStatement();
+			connEstablished=true;
 			String sql = "CREATE DATABASE IF NOT EXISTS "+DB_NAME;
 			stmt.executeUpdate(sql);
+			connEstablished=true;
 		}catch(SQLException se){
-			se.printStackTrace();    
+			se.printStackTrace();  
+			connEstablished=false;
 		}catch(Exception e){
 			e.printStackTrace();   
+			connEstablished=false;
 		}finally{
 			try{
 				if(stmt!=null)
@@ -242,7 +252,7 @@ public class MySQL implements DatabaseServiceable {
 				   boolean finishedT = rs.getBoolean(FINISHED);
 				   String notesT=rs.getString(NOTES);
 				   goalList.add(new Goal.Builder(nameT, plannedDateT, GoalType.goalTypeFromId(typeT))
-						                .executed(finishedT).notes(notesT).realEndDate(endDateT)
+						                .finished(finishedT).notes(notesT).realEndDate(endDateT)
 					   				    .category(new Category(categoryT)).build());
 			   }
 			   return goalList;
@@ -284,7 +294,7 @@ public class MySQL implements DatabaseServiceable {
 				   boolean finishedT = rs.getBoolean(FINISHED);
 				   String notesT=rs.getString(NOTES);
 				   goalList.add(new Goal.Builder(nameT, plannedDateT, GoalType.goalTypeFromId(typeT))
-					                    .executed(finishedT).notes(notesT).realEndDate(endDateT)
+					                    .finished(finishedT).notes(notesT).realEndDate(endDateT)
 					   				    .category(new Category(categoryT)).build());
 			   }
 			   return goalList;
@@ -405,6 +415,71 @@ public class MySQL implements DatabaseServiceable {
 			   }
 		   }
 	   }   
+	   
+	   public int amountOfFinishedGoals(String tableName){
+		   int count = 0;
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(Name) FROM "+tableName+" WHERE Finished = 1;";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }
+	   
+	   public int amountOfNotFinishedGoals(String tableName){
+		   int count = 0;
+		   
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(Name) FROM "+tableName.toLowerCase()+" WHERE Finished = 0;";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }
 	   public int amountOfGoalsByType(String tableName, GoalType goalType){
 		   int count = 0;
 		   System.out.println(goalType.getId());
@@ -437,6 +512,70 @@ public class MySQL implements DatabaseServiceable {
 			   }
 		   }
 	   }   
+	   public int amountOfFinishedGoalsByType(String tableName, GoalType goalType){
+		   int count = 0;
+		   System.out.println(goalType.getId());
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(Name) FROM "+tableName.toLowerCase()+" WHERE Type= "+goalType.getId()+" AND Finished = 1;";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }
 	   
+	   public int amountOfNotFinishedGoalsByType(String tableName, GoalType goalType){
+		   int count = 0;
+		   System.out.println(goalType.getId());
+		   try{
+			   Class.forName("com.mysql.jdbc.Driver");
+			   conn = DriverManager.getConnection(DB_URL_MADE, USER, PASS);
+			   stmt = conn.createStatement();
+			   String sql = "SELECT COUNT(Name) FROM "+tableName.toLowerCase()+" WHERE Type= "+goalType.getId()+" AND Finished = 0;";
+			  ResultSet rs = stmt.executeQuery(sql);
+		   while(rs.next()){
+			   count=rs.getInt(1);
+		   }	   
+		   return count;
+		   }catch(SQLException se){
+			   se.printStackTrace();
+			   return count;
+		   }catch(Exception e){
+			   e.printStackTrace();
+			   return count;
+		   }finally{
+			   try{
+				   if(stmt!=null)
+					  stmt.close();
+			   }catch(SQLException se2){}
+			   try{
+				   if(conn!=null)
+					   conn.close();
+			   }catch(SQLException se){
+				   se.printStackTrace();
+			   }
+		   }
+	   }
 	   
 }

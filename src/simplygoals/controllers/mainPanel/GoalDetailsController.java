@@ -81,7 +81,7 @@ public class GoalDetailsController implements Initializable {
 			realDateOfEnd.setValue(this.goal.getRealEndDate());
 			categoryList.setItems(mainControl.getModelLogic().getCategoryList());
 			categoryList.setValue(this.goal.getCategory());;
-			isFinished.setSelected(this.goal.getExecuted());
+			isFinished.setSelected(this.goal.getFinished());
 			typeList.setItems(FXCollections.observableArrayList(GoalType.DAILY_GOAL,GoalType.MONTHLY_GOAL,GoalType.WEEKLY_GOAL,GoalType.YEARLY_GOAL));
 			typeList.setValue(this.goal.getType());
 			notes.setText(this.goal.getNotes());
@@ -120,7 +120,7 @@ public class GoalDetailsController implements Initializable {
 						String date=realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER);
 						this.goal.setRealEndDate(DateUtil.parse(date));
 						this.goal.setCategory(categoryList.getValue());
-						this.goal.setExecuted(isFinished.isSelected());
+						this.goal.setFinished(isFinished.isSelected());
 						this.goal.setType(typeList.getValue());
 						this.goal.setNotes(notes.getText());				
 						

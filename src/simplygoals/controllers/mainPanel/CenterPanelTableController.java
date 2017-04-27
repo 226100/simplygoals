@@ -118,7 +118,7 @@ public class CenterPanelTableController implements Initializable {
 			getRealEndColumn().setCellValueFactory(cellData -> cellData.getValue().realEndDateProperty().asString());
 			getCategoryColumn().setCellValueFactory(cellData -> cellData.getValue().categoryProperty().asString());
 			getTypeColumn().setCellValueFactory(cellData -> cellData.getValue().typeProperty().asString());
-			getExecutedColumn().setCellValueFactory(cellData -> cellData.getValue().executedProperty().asString());
+			getExecutedColumn().setCellValueFactory(cellData -> cellData.getValue().finishedProperty().asString());
 			getNotesColumn().setCellValueFactory(cellData -> cellData.getValue().notesProperty());
 
 			//First letter uppercase

@@ -1,4 +1,5 @@
 package simplygoals.controllers.topPanel;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,58 +19,69 @@ import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.User;
 
 public class AddUserController implements Initializable {
-			
+
 	private MainPanelController mainControl = new MainPanelController();
-	
+
 	@FXML
 	private Label UserErrorLabel;
-	
-    @FXML
-    private Button UserNameOkButton;
-    
 
-    @FXML
-    private AnchorPane AddUserAnchor;
-    
+	@FXML
+	private Button UserNameOkButton;
 
-    @FXML
-    private TextField UserNameTextField;
-    
-    private Stage stage;
-    
+	@FXML
+	private AnchorPane AddUserAnchor;
+
+	@FXML
+	private TextField UserNameTextField;
+
+	private Stage stage;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 	}
-	
-	public void setMainControl(MainPanelController mainPanel){
-		mainControl=mainPanel;
+
+	public void setMainControl(MainPanelController mainPanel) {
+		mainControl = mainPanel;
 		addUser();
 	}
-	public void setStage(Stage stage){
-		this.stage=stage;
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
-	public void addUser(){
-		UserNameOkButton.setOnAction(x->{
-			if (!UserNameTextField.textProperty().getValue().isEmpty()){
-				String message=mainControl.getModelLogic().addUserToLogic(new User(UserNameTextField.getText()));
-				UserErrorLabel.setTextFill(Color.GREEN);
-				UserErrorLabel.setText(message);
-				if(mainControl.getModelLogic().getUserList().size()==1){
-					mainControl.getModelLogic().setCurrentUser(mainControl.getModelLogic().getUserList().get(0));	
+
+	public void addUser() {
+		UserNameOkButton.setOnAction(x -> {
+			if (mainControl.getModelLogic().getMySQL().isConnEstablished()) {
+				if (!UserNameTextField.textProperty().getValue().isEmpty()) {
+					String message = mainControl.getModelLogic().addUserToLogic(new User(UserNameTextField.getText()));
+					UserErrorLabel.setTextFill(Color.GREEN);
+					UserErrorLabel.setText(message);
+					if (mainControl.getModelLogic().getUserList().size() == 1) {
+						mainControl.getModelLogic().setCurrentUser(mainControl.getModelLogic().getUserList().get(0));
+					}
+					PauseTransition delay = new PauseTransition(Duration.seconds(1));
+					delay.setOnFinished(event -> UserErrorLabel.setText(""));
+					delay.play();
+				} else {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(stage);
+					alert.setTitle("No Input");
+					alert.setHeaderText("Lack of username");
+					alert.setContentText("Please insert username to field");
+					alert.showAndWait();
+					// If there was no user and first User was added
+					// automatically set this user as current User
 				}
-				PauseTransition delay = new PauseTransition(Duration.seconds(1));
-				delay.setOnFinished( event -> UserErrorLabel.setText("") );
-				delay.play();
-			}else{
+			} else {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.initOwner(stage);
-				alert.setTitle("No Input");
-				alert.setHeaderText("Lack of username");
-				alert.setContentText("Please insert username to field");
+				alert.setTitle("No connection with database");
+				alert.setHeaderText("No connection with database");
+				alert.setContentText("Please check your connection with database");
 				alert.showAndWait();
-			//If there was no user and first User was added automatically set this user as current User
 			}
 		});
 	}
 }
+

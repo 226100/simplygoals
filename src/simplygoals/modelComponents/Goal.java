@@ -16,7 +16,7 @@ public class Goal implements Comparable<Goal>{
 	private ObjectProperty<LocalDate> realEndDate;
 	private ObjectProperty<Category> category;
 	private final ObjectProperty<GoalType> type;
-	private BooleanProperty executed;
+	private BooleanProperty finished;
 	private StringProperty notes;
 	
 	//***GETTERS AND SETTERS***//
@@ -81,16 +81,16 @@ public class Goal implements Comparable<Goal>{
         return type;
     }
      
-    public boolean getExecuted() {
-        return executed.get();
+    public boolean getFinished() {
+        return finished.get();
     }
 
-    public void setExecuted(boolean executed) {
-        this.executed.set(executed);
+    public void setFinished(boolean finished) {
+        this.finished.set(finished);
     }
 
-    public BooleanProperty executedProperty() {
-        return executed;
+    public BooleanProperty finishedProperty() {
+        return finished;
     }
     
     public String getNotes() {
@@ -111,7 +111,7 @@ public class Goal implements Comparable<Goal>{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((executed == null) ? 0 : executed.hashCode());
+		result = prime * result + ((finished == null) ? 0 : finished.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result + ((plannedDateOfEnd == null) ? 0 : plannedDateOfEnd.hashCode());
@@ -134,10 +134,10 @@ public class Goal implements Comparable<Goal>{
 				return false;
 		} else if (!category.equals(other.category))
 			return false;
-		if (executed == null) {
-			if (other.executed != null)
+		if (finished == null) {
+			if (other.finished != null)
 				return false;
-		} else if (!executed.equals(other.executed))
+		} else if (!finished.equals(other.finished))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -176,7 +176,7 @@ public class Goal implements Comparable<Goal>{
         this.type=new SimpleObjectProperty<GoalType>(builder.type);
         this.notes = new SimpleStringProperty(builder.notes);
         this.realEndDate=new SimpleObjectProperty<LocalDate>(builder.realEndDate);
-        this.executed=new SimpleBooleanProperty(builder.executed);
+        this.finished=new SimpleBooleanProperty(builder.finished);
     }
  
  
@@ -188,7 +188,7 @@ public class Goal implements Comparable<Goal>{
     	private final GoalType type;
     	private LocalDate realEndDate;
     	private Category category;
-    	boolean executed;
+    	boolean finished;
     	private String notes;
     	
         public Builder(final String name, final String date, final GoalType type)
@@ -206,8 +206,8 @@ public class Goal implements Comparable<Goal>{
             this.category = category;
             return this;
         }
-        public Builder executed(final boolean executed){
-        	this.executed=executed;
+        public Builder finished(final boolean finished){
+        	this.finished=finished;
         	return this;
         }
         public Builder realEndDate(final String date){

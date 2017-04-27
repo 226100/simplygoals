@@ -215,7 +215,7 @@ public class ModelLogic implements LogicHandling{
 			if(goal.getCategory()!=null&&goal.getRealEndDate()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
 
 				mySQL.updateRecord(getCurrentUser().getName().toLowerCase(), goal.getName().toLowerCase(), goal.getRealEndDate().format(DateUtil.DATE_FORMATTER).toString(),
-						goal.getCategory().getName(),goal.getType().getId(),goal.getExecuted(), goal.getNotes());
+						goal.getCategory().getName(),goal.getType().getId(),goal.getFinished(), goal.getNotes());
 			}
 		});
 
@@ -226,9 +226,11 @@ public class ModelLogic implements LogicHandling{
 		Integer [] tab = {0,0,0,0,0,0,0,0,0,0,0,0};
 		List<Integer> reachedGoals=Arrays.asList(tab);
 		ObservableList<Goal> list = FXCollections.observableArrayList();
-		list=mySQL.getAllRecords(userList.getCurrentUser().getName());
-		if(Optional.ofNullable(list).isPresent()){
-			list=list.stream().filter(i->(i.getPlannedDateOfEnd().isBefore(i.getRealEndDate()))&&(i.getExecuted()==true)).collect(Collectors.toCollection(FXCollections::observableArrayList));
+		
+		
+		if(Optional.ofNullable(list).isPresent()&&Optional.ofNullable(userList.getCurrentUser()).isPresent()){
+			list=mySQL.getAllRecords(userList.getCurrentUser().getName());
+			list=list.stream().filter(i->(i.getPlannedDateOfEnd().isBefore(i.getRealEndDate()))&&(i.getFinished()==true)).collect(Collectors.toCollection(FXCollections::observableArrayList));
 			for(Goal goal:list){
 				int index=goal.getRealEndDate().getMonthValue()-1;
 				Integer count=reachedGoals.get(index);

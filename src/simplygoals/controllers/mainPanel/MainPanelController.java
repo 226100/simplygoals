@@ -19,6 +19,7 @@ import simplygoals.modelComponents.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javafx.scene.control.MenuItem;
@@ -30,10 +31,12 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -59,6 +62,10 @@ public class MainPanelController implements Initializable {
 	private ModelLogic modelLogic = new ModelLogic();
 	private ObjectProperty<GoalType> typeInTableView = new SimpleObjectProperty<>();
 	
+	private Stage stage;
+	public void setStage(Stage stage){
+		this.stage=stage;
+	}
     @FXML
     private TopPanelController topPanelController;
     
@@ -120,10 +127,21 @@ public class MainPanelController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     	
     	getModelLogic().initDB();//if there is no database create it, otherwise not
-    	getModelLogic().initUserList();//initialize user list in application(user list is take from database)
+    	//If there is connection with databasse initialize user list, otherwise show alert for application user
+    	if(getModelLogic().getMySQL().isConnEstablished()==true){
+    		getModelLogic().initUserList();//initialize user list in application(user list is take from database)
+    	}else{
+    		Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(stage);
+	        alert.setTitle("Error Connection with DB");
+	        alert.setHeaderText("Connection with Database not established");
+	        alert.setContentText("Please check your connection with database");
+	        alert.showAndWait();
+    	}
     	handleTopPanel();
     	handleLeftPanel();
     	handleTypeOfGoal();
+    	//set controller to table, required to show data in table
     	centerPanelTableController.setMainControl(this);
     }
 
@@ -145,7 +163,7 @@ public class MainPanelController implements Initializable {
     	showMonthlyGoalList();
     	showYearlyGoalList();
     }
-    
+    //Show above table type of current select goal
     public void handleTypeOfGoal(){
     	typeOfGoal.setVisible(false);
     	typeOfGoal.textProperty().bind(typeInTableView.asString());
@@ -203,7 +221,7 @@ public class MainPanelController implements Initializable {
     		setTypeInTableView(GoalType.YEARLY_GOAL);
 		});
     }
-    
+    //If user is select, show name of user below button(set User), otherwise set text invisible for application user
     public void showCurrentUser(){
     	Button button = getTopPanelController().getCurrentUserButton();
     	button.textFillProperty().set(Color.valueOf("222223"));
@@ -394,7 +412,8 @@ public class MainPanelController implements Initializable {
 	        	StatisticsController statisticsController = fxmlLoader.getController();
 	        	statisticsController.setMainControl(MainPanelController.this);
 	        	statisticsController.setStage(stage);
-	        	//Arrays.asList(3,2,5,12,33,1,45,13,4,10,11,12)
+	        	List <Integer> list=Arrays.asList(3,2,5,12,33,1,45,13,4,10,11,12);
+	        	
 	        	statisticsController.setGoalsData(modelLogic.getReachedGoalsInTime());
 	        	stage.show();
 				} catch(Exception e) {
