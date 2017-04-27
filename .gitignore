@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 [Bb]in
+.project
+.classpath
+.fxbuild
 # Log file
 *.log
 

@@ -6,10 +6,13 @@ import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import simplygoals.serialization.ClassSerializable;
+import simplygoals.util.FileCreator;
+import simplygoals.util.FileTester;
 
 public class AllCategories implements Storable<Category>, Serializable, ClassSerializable<Category> {
 	
 	//***UID, CATEGORY LIST***//
+	private static final String FILE_NAME= "src/CategoryList.obj";
 	private static final long serialVersionUID = 3812017177088226527L;
 	private ObservableList<Category> categoryList=FXCollections.observableArrayList();;
 	
@@ -26,7 +29,12 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 	
 	//***CONSTRUCTORS***//
 	public AllCategories(){
-		setCategoryList(serializeFromFile("CategoryList.obj"));
+		
+		if(FileTester.hasApplicationFile(FILE_NAME)){
+			setCategoryList(serializeFromFile(FILE_NAME));
+		}else{
+			FileCreator.createFile(FILE_NAME);
+		}
 	
 	}
 	
@@ -44,7 +52,12 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 		Optional<Category> categoryOp = Optional.of(component);
 		categoryOp.ifPresent(c->{
 			getCategoryList().add(c);
-			serializeToFile(getCategoryList(),"CategoryList.obj");
+			if(FileTester.hasApplicationFile(FILE_NAME)){
+				serializeToFile(getCategoryList(),FILE_NAME);
+			}else{
+				FileCreator.createFile(FILE_NAME);
+				serializeToFile(getCategoryList(),FILE_NAME);
+			}
 		});
 		
 	}
@@ -56,7 +69,12 @@ public class AllCategories implements Storable<Category>, Serializable, ClassSer
 		categoryOp.ifPresent(c->{
 			if(isComponentInList(component)){
 				getCategoryList().remove(c);
-				serializeToFile(getCategoryList(),"CategoryList.obj");
+				if(FileTester.hasApplicationFile(FILE_NAME)){
+					serializeToFile(getCategoryList(),FILE_NAME);
+				}else{
+					FileCreator.createFile(FILE_NAME);
+					serializeToFile(getCategoryList(),FILE_NAME);
+				}
 			}
 		});
 		
