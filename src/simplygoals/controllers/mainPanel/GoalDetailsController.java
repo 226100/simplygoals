@@ -9,23 +9,36 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import simplygoals.modelComponents.Category;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.util.DateUtil;
+
 public class GoalDetailsController implements Initializable {
+
+	/**
+	 * Variable of MainPanelController, used to get instance of object of type
+	 * MainPanelController
+	 */
 	private MainPanelController mainControl = new MainPanelController();
-	private Goal goal=null;
+
+	/**
+	 * Variable of Stage, used to get access to current stage. Required to show
+	 * alerts
+	 */
+	private Stage stage;
+
+	/** Variable of Goal, use to get instance of clicked goal */
+	private Goal goal = null;
+
 	@FXML
 	private ChoiceBox<GoalType> typeList;
 
@@ -37,111 +50,141 @@ public class GoalDetailsController implements Initializable {
 
 	@FXML
 	private DatePicker realDateOfEnd;
-    @FXML
-    private TextArea notes;
-    
-    @FXML
-    private Button save;
+	@FXML
+	private TextArea notes;
 
-    @FXML
-    private Button today;
-    
-    @FXML
-    private TextField name;
+	@FXML
+	private Button save;
 
-    @FXML
-    private TextField plannedDateOfEnd;
-    
-    private Stage stage;
-    
+	@FXML
+	private Button today;
+
+	@FXML
+	private TextField name;
+
+	@FXML
+	private TextField plannedDateOfEnd;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 	}
-	
-	public void setMainControl(MainPanelController mainPanel){
-		mainControl=mainPanel;
+
+	/**
+	 * Get instance of object(type MainPanelController) from
+	 * CenterPanelTableController and set to variable mainControl
+	 */
+	public void setMainControl(MainPanelController mainPanel) {
+		mainControl = mainPanel;
 		showGoalDetails();
 		saveGoal();
 		setToday();
 	}
-	public void setStage(Stage stage){
-		this.stage=stage;
+
+	/**
+	 * Get instance of current stage(GoalDetails) from
+	 * CenterPanelTableController and set to variable this.stage
+	 */
+	public void setStage(Stage stage) {
+		this.stage = stage;
 	}
-	public void setGoal(Goal goal){
-		this.goal=goal;
+
+	/**
+	 * Get instance of object of type Goal from CenterPanelTableController and
+	 * set to variable this.goal
+	 */
+	public void setGoal(Goal goal) {
+		this.goal = goal;
 	}
-	
-	public void showGoalDetails(){
-		
+
+	/**
+	 * Show details about goal in Window if goal is exist, if doesn't exist
+	 * fields remain empty
+	 */
+	public void showGoalDetails() {
+
 		if (Optional.ofNullable(goal).isPresent()) {
-	        
+
 			name.setText(this.goal.toString());
 			plannedDateOfEnd.setText(this.goal.getPlannedDateOfEnd().toString());
 			realDateOfEnd.setValue(this.goal.getRealEndDate());
 			categoryList.setItems(mainControl.getModelLogic().getCategoryList());
-			categoryList.setValue(this.goal.getCategory());;
+			categoryList.setValue(this.goal.getCategory());
+			;
 			isFinished.setSelected(this.goal.getFinished());
-			typeList.setItems(FXCollections.observableArrayList(GoalType.DAILY_GOAL,GoalType.MONTHLY_GOAL,GoalType.WEEKLY_GOAL,GoalType.YEARLY_GOAL));
+			typeList.setItems(FXCollections.observableArrayList(GoalType.DAILY_GOAL, GoalType.MONTHLY_GOAL,
+					GoalType.WEEKLY_GOAL, GoalType.YEARLY_GOAL));
 			typeList.setValue(this.goal.getType());
 			notes.setText(this.goal.getNotes());
-	    } else {
+		} else {
 
-	    	name.setText("");
-	    	plannedDateOfEnd.setText("");
+			name.setText("");
+			plannedDateOfEnd.setText("");
 			notes.setText("");
-	    }
+		}
 	}
-	public void setToday(){
-		today.setOnAction(x->{
+
+	/**
+	 * After click on button Today set data in field realDateOfEnd on current
+	 * day
+	 */
+	public void setToday() {
+		today.setOnAction(x -> {
 			realDateOfEnd.setValue(LocalDate.now());
 		});
 	}
-	public void saveGoal(){
-		save.setOnAction(x->{
 
-			boolean isDateValid=false;
-			if(realDateOfEnd.getValue()!=null){
-				if(DateUtil.validDate(realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER))){
-					isDateValid=true;
-				}else{
-				isDateValid=false;
-				Alert alert = new Alert(AlertType.WARNING);
-		        alert.initOwner(stage);
-		        alert.setTitle("Error in Data");
-		        alert.setHeaderText("Data is invalid");
-		        alert.setContentText("Please insert valid data in format dd-mm-yyyy or get data from DataPicker");
-		        alert.showAndWait();
-		
+	/**
+	 * If data in field realDateOfEnd is valid set control bit isDateValid to
+	 * true, otherwise show alert to user If all field requirements are true set
+	 * data to goal object and update this object in database Show warning that
+	 * user was update If conditions are false show alert to user about filling
+	 * all field
+	 */
+	public void saveGoal() {
+		save.setOnAction(x -> {
+
+			boolean isDateValid = false;
+			if (realDateOfEnd.getValue() != null) {
+				if (DateUtil.validDate(realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER))) {
+					isDateValid = true;
+				} else {
+					isDateValid = false;
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.initOwner(stage);
+					alert.setTitle("Error in Data");
+					alert.setHeaderText("Data is invalid");
+					alert.setContentText("Please insert valid data in format dd-mm-yyyy or get data from DataPicker");
+					alert.showAndWait();
+
 				}
 			}
-			
-			if(name.getText().length()>0&plannedDateOfEnd.getText().length()>0&&isDateValid&&categoryList.getSelectionModel().isEmpty()==false&&typeList.getSelectionModel().isEmpty()==false){
-						String date=realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER);
-						this.goal.setRealEndDate(DateUtil.parse(date));
-						this.goal.setCategory(categoryList.getValue());
-						this.goal.setFinished(isFinished.isSelected());
-						this.goal.setType(typeList.getValue());
-						this.goal.setNotes(notes.getText());				
-						
-						mainControl.getModelLogic().updateGoal(this.goal);
-						Alert alert = new Alert(AlertType.WARNING);
-				        alert.initOwner(stage);
-				        alert.setTitle("Goal saved");
-				        alert.setContentText("Goal was saved");
-				        alert.showAndWait();
-				        mainControl.refreshTableView();
-						
-			}else{
+
+			if (name.getText().length() > 0 & plannedDateOfEnd.getText().length() > 0 && isDateValid
+					&& categoryList.getSelectionModel().isEmpty() == false
+					&& typeList.getSelectionModel().isEmpty() == false) {
+				String date = realDateOfEnd.getValue().format(DateUtil.DATE_FORMATTER);
+				this.goal.setRealEndDate(DateUtil.parse(date));
+				this.goal.setCategory(categoryList.getValue());
+				this.goal.setFinished(isFinished.isSelected());
+				this.goal.setType(typeList.getValue());
+				this.goal.setNotes(notes.getText());
+
+				mainControl.getModelLogic().updateGoal(this.goal);
 				Alert alert = new Alert(AlertType.WARNING);
-		        alert.initOwner(stage);
-		        alert.setTitle("No inputs");
-		        alert.setHeaderText("No all fields filled");
-		        alert.setContentText("Please fill all fields with data");
-		        alert.showAndWait();
+				alert.initOwner(stage);
+				alert.setTitle("Goal saved");
+				alert.setContentText("Goal was saved");
+				alert.showAndWait();
+				mainControl.refreshTableView();
+			} else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.initOwner(stage);
+				alert.setTitle("No inputs");
+				alert.setHeaderText("No all fields filled");
+				alert.setContentText("Please fill all fields with data");
+				alert.showAndWait();
 			}
 		});
 	}
 }
-
-

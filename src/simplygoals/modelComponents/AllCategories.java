@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import simplygoals.serialization.ClassSerializable;
+import simplygoals.util.ClassSerializable;
 import simplygoals.util.FileCreator;
 import simplygoals.util.FileTester;
 
