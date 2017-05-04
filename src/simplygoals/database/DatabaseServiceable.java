@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 
+/**Interface for each database. current database is MySQL */
 public interface DatabaseServiceable {
 	   
 	 public void createDatabase();

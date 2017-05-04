@@ -1,20 +1,19 @@
 package simplygoals.controllers.topPanel;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
@@ -23,9 +22,20 @@ import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.util.DateUtil;
 
+/** This controller is responsible for handling adding goal in window */
 public class AddGoalController implements Initializable {
 
+	/**
+	 * Variable of MainPanelController, used to get instance of object of type
+	 * MainPanelController
+	 */
 	private MainPanelController mainControl = new MainPanelController();
+
+	/**
+	 * Variable of Stage, used to get access to current stage. Required to show
+	 * alerts
+	 */
+	private Stage stage;
 
 	@FXML
 	private Label msg;
@@ -51,23 +61,33 @@ public class AddGoalController implements Initializable {
 	@FXML
 	private ComboBox<Category> category;
 
-	private Stage stage;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 
+	/**
+	 * Get instance of object(type MainPanelController) from MainPanelController
+	 * and set to variable mainControl and next call other methods
+	 */
 	public void setMainControl(MainPanelController mainPanel) {
 		mainControl = mainPanel;
 		setDataInBoxes();
 		addGoal();
 	}
 
+	/**
+	 * Get instance of current stage(AddGoal) from MainPanelController and
+	 * set to variable this.stage
+	 */
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
+	/**
+	 * After click on button addGoalButton if it is possible add goal to
+	 * application, otherwise show alert
+	 */
 	public void addGoal() {
 		addGoalButton.setOnAction(x -> {
 			if (mainControl.getModelLogic().getMySQL().isConnEstablished()) {
@@ -88,7 +108,7 @@ public class AddGoalController implements Initializable {
 					}
 				}
 				if (goalName.getText().length() > 0 && isDateValid && typeOfGoal.getSelectionModel().isEmpty() == false
-						&& category.getSelectionModel().isEmpty() == false) {
+						&& category.getSelectionModel().isEmpty() == false&&mainControl.getModelLogic().getCurrentUser()!=null) {
 					mainControl.getModelLogic()
 							.addGoalToUser(new Goal.Builder(goalName.getText(),
 									dateOfEnd.getValue().format(DateUtil.DATE_FORMATTER).toString(),
@@ -118,6 +138,7 @@ public class AddGoalController implements Initializable {
 		});
 	}
 
+	/** Set current list of categories to box and list types of goals */
 	public void setDataInBoxes() {
 		category.setItems(mainControl.getModelLogic().getCategoryList());
 		typeOfGoal.setItems(FXCollections.observableArrayList(GoalType.DAILY_GOAL, GoalType.MONTHLY_GOAL,

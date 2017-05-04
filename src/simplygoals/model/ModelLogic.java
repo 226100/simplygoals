@@ -159,7 +159,7 @@ public class ModelLogic implements LogicHandling{
 		setMsg("Goal value null");
 		
 		Optional.of(goal).ifPresent(u->{
-			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null){
+			if(goal.getCategory()!=null&&goal.getType()!=null&&goal.getNotes()!=null&&getCurrentUser()!=null){
 				mySQL.addRecord(getCurrentUser().getName(), goal.getName(), DateUtil.format(goal.getPlannedDateOfEnd()),DateUtil.format(goal.getRealEndDate()),
 					            goal.getCategory().getName(),goal.getType().getId(),false, goal.getNotes());
 			

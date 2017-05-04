@@ -1,5 +1,6 @@
 package simplygoals.modelComponents;
 
+/**Types of goals */
 public enum GoalType {
 	
 	DAILY_GOAL(1, "Daily Goal"),WEEKLY_GOAL(2, "Weekly Goal"),MONTHLY_GOAL(3, "Monthly Goal"),YEARLY_GOAL(4, "Yearly Goal");

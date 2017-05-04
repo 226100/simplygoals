@@ -13,7 +13,7 @@ public interface LogicHandling {
 //***HANDLE USERS***//
 	
 	
-	//*This method add user to logic whole application, so user is added to the model and database
+	/**This method add user to logic whole application, so user is added to the model and database*/
 	String addUserToLogic(User user);
 	
 	//*This method remove user from logic of whole application, so user is removed from the model and database

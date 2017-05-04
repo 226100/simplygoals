@@ -2,9 +2,7 @@ package simplygoals.controllers.topPanel;
 
 import java.net.URL;
 import java.text.DateFormatSymbols;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -21,11 +19,23 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
-import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.modelComponents.User;
 
+/** This controller is responsible for showing data in statistic window */
 public class StatisticsController implements Initializable {
+
+	/**
+	 * Variable of MainPanelController, used to get instance of object of type
+	 * MainPanelController
+	 */
+	private MainPanelController mainControl = new MainPanelController();
+
+	/**
+	 * Variable of Stage, used to get access to current stage. Required to show
+	 * alerts
+	 */
+	private Stage stage;
 
 	@FXML
 	private Label weeklyInProcess;
@@ -83,11 +93,7 @@ public class StatisticsController implements Initializable {
 	@FXML
 	private Label yearlyNumber;
 
-	private MainPanelController mainControl = new MainPanelController();
-
-	private Stage stage;
-
-	// This collection represent object with names of all months
+	/** This collection represent object with names of all months */
 	private ObservableList<String> monthNames = FXCollections.observableArrayList();
 
 	@Override
@@ -95,6 +101,10 @@ public class StatisticsController implements Initializable {
 
 	}
 
+	/**
+	 * Get instance of object(type MainPanelController) from MainPanelController
+	 * and set to variable mainControl and next call other methods
+	 */
 	public void setMainControl(MainPanelController mainPanel) {
 		mainControl = mainPanel;
 		// This part of code set to XAxis in chart names of all months
@@ -140,13 +150,15 @@ public class StatisticsController implements Initializable {
 		}
 	}
 
-	// set stage for Statistic Controller, this stage is required to handle
-	// alerts
+	/**
+	 * set stage for Statistic Controller, this stage is required to handle
+	 * alerts
+	 */
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
-	// this method set data to chart
+	/** this method set data to chart */
 	public void setGoalsData(List<Integer> monthCounter) {
 
 		XYChart.Series<String, Integer> series = new XYChart.Series<>();
@@ -156,7 +168,7 @@ public class StatisticsController implements Initializable {
 		chart.getData().add(series);
 	}
 
-	// set to label name of current user
+	/** set to label name of current user */
 	public void setUserLabel() {
 		user.textProperty().bind(mainControl.getModelLogic().getCurrentUserProperty().asString());
 	}

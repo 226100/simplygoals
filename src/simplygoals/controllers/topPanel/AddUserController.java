@@ -7,10 +7,10 @@ import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,9 +18,20 @@ import javafx.util.Duration;
 import simplygoals.controllers.mainPanel.MainPanelController;
 import simplygoals.modelComponents.User;
 
+/** This controller handle adding user */
 public class AddUserController implements Initializable {
 
+	/**
+	 * Variable of MainPanelController, used to get instance of object of type
+	 * MainPanelController
+	 */
 	private MainPanelController mainControl = new MainPanelController();
+
+	/**
+	 * Variable of Stage, used to get access to current stage. Required to show
+	 * alerts
+	 */
+	private Stage stage;
 
 	@FXML
 	private Label UserErrorLabel;
@@ -34,22 +45,33 @@ public class AddUserController implements Initializable {
 	@FXML
 	private TextField UserNameTextField;
 
-	private Stage stage;
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	}
 
+	/**
+	 * Get instance of object(type MainPanelController) from MainPanelController
+	 * and set to variable mainControl and next call addUser()
+	 */
 	public void setMainControl(MainPanelController mainPanel) {
 		mainControl = mainPanel;
 		addUser();
 	}
 
+	/**
+	 * Get instance of current stage(AddUser) from MainPanelController and set
+	 * to variable this.stage
+	 */
+
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
 
+	/**
+	 * After click on add User, if it's possible add user to apllication,
+	 * otherwise show alert
+	 */
 	public void addUser() {
 		UserNameOkButton.setOnAction(x -> {
 			if (mainControl.getModelLogic().getMySQL().isConnEstablished()) {
@@ -84,4 +106,3 @@ public class AddUserController implements Initializable {
 		});
 	}
 }
-

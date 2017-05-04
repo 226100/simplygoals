@@ -22,6 +22,7 @@ import simplygoals.modelComponents.Goal;
 import simplygoals.modelComponents.GoalType;
 import simplygoals.util.DateUtil;
 
+/** Controller is responsible for show datails about clicked goal */
 public class GoalDetailsController implements Initializable {
 
 	/**

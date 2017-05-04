@@ -5,7 +5,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import simplygoals.controllers.mainPanel.MainPanelController;
-	 
+
+/**Main class responsible for loading main stage */
 public class Main extends Application {
 	private Stage primaryStage;
 	@Override
@@ -20,6 +21,8 @@ public class Main extends Application {
 	    stage.show();
 	    MainPanelController mainPanelController = new MainPanelController();
 	    mainPanelController=fxmlLoader.getController();
+	    
+	    /**Send instance object of type Stage to MainPanelController */
 	    mainPanelController.setStage(stage);
 	}
     public Stage getPrimaryStage() {

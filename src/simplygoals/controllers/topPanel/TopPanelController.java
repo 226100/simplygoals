@@ -8,36 +8,36 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
+/** Controller responsible for handle panel which take place on top */
 public class TopPanelController implements Initializable {
-	 
-    @FXML
-    private Button RemoveGoalButton;
-    
-    @FXML
-    private Button currentUserButton;
-    
-    @FXML
-    private Button AddCategoryButton;
-    
-    @FXML
-    private Button AddGoalButton;
-    
-    @FXML
-    private Button RemoveUserButton;
-    
-    @FXML
-    private Button AddUserButton;
-    
-    @FXML
-    private Button RemoveCategoryButton;
-    
-    @FXML
-    private HBox TopPanelBox;
 
 	@FXML
-    private Button StatisticsButton;
-	
-	
+	private Button RemoveGoalButton;
+
+	@FXML
+	private Button currentUserButton;
+
+	@FXML
+	private Button AddCategoryButton;
+
+	@FXML
+	private Button AddGoalButton;
+
+	@FXML
+	private Button RemoveUserButton;
+
+	@FXML
+	private Button AddUserButton;
+
+	@FXML
+	private Button RemoveCategoryButton;
+
+	@FXML
+	private HBox TopPanelBox;
+
+	@FXML
+	private Button StatisticsButton;
+
 	public Button getAddCategoryButton() {
 		return AddCategoryButton;
 	}
@@ -54,7 +54,7 @@ public class TopPanelController implements Initializable {
 		return AddUserButton;
 	}
 
-    public Button getRemoveCategoryButton() {
+	public Button getRemoveCategoryButton() {
 		return RemoveCategoryButton;
 	}
 
@@ -65,12 +65,13 @@ public class TopPanelController implements Initializable {
 	public Button getCurrentUserButton() {
 		return currentUserButton;
 	}
-    public Button getRemoveGoalButton() {
+
+	public Button getRemoveGoalButton() {
 		return RemoveGoalButton;
 	}
-    
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
 }
